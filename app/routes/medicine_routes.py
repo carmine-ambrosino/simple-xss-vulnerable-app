@@ -2,7 +2,7 @@ from flask import Blueprint, render_template
 
 from controllers.medicine_controller import MedicineController
 
-medicine_bp = Blueprint('medicine', __name__, url_prefix='/medicine')
+medicine_bp = Blueprint('medicine', __name__, url_prefix='/api/medicine')
 
 @medicine_bp.route('/')
 def medicine_index():

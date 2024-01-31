@@ -2,7 +2,7 @@ from flask import Blueprint
 
 from controllers.patient_controller import PatientController
 
-patient_bp = Blueprint('patient', __name__, url_prefix='/patient')
+patient_bp = Blueprint('patient', __name__, url_prefix='/api/patient')
 
 
 @patient_bp.route('/get-all', methods=['GET'])
