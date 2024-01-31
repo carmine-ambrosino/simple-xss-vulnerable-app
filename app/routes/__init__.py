@@ -1,0 +1,16 @@
+from flask import Blueprint
+
+from routes.medicine_routes import medicine_bp
+from routes.patient_routes import patient_bp
+from routes.prescription_routes import prescription_bp
+# from routes.medical_prescription_routes import medical_prescription_bp
+
+# General blueprint for routes
+routes_bp = Blueprint('routes', __name__, url_prefix='/api')
+
+routes_bp.register_blueprint(medicine_bp)
+routes_bp.register_blueprint(patient_bp)
+routes_bp.register_blueprint(prescription_bp)
+# routes_bp.register_blueprint(medical_prescription_bp)
+
+# Add other routes

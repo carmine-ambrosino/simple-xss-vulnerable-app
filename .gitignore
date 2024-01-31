@@ -1,0 +1,11 @@
+# Ignore venv
+*.venv
+
+# Ignore .idea
+*.idea
+
+#ignore .vscode
+*.vscode
+
+# Ignore pycache
+*/__py_cache__
