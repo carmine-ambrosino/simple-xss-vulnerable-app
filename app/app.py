@@ -17,6 +17,7 @@ def create_app(config_name='development'):
 
     # Routes
     application.register_blueprint(routes_bp)
+    application.register_blueprint(error_handler_bp)
 
     return application
 

@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+
+h1{
+    color: #333;
+}
+
+
+.error-container {
+    text-align: center;
+    margin: 100px auto;
+    max-width: 600px;
+}
+
+.error-container h1 {
+    font-size: 72px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.error-container p {
+    font-size: 18px;
+    color: #666;
+}
+
+.error-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.error-container a:hover {
+    text-decoration: underline;
+}
