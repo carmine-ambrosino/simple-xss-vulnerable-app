@@ -1,0 +1,16 @@
+# Ignore venv
+*.venv
+
+# Ignore .idea
+*.idea
+
+#ignore .vscode
+*.vscode
+
+# Ignore pycache
+app/__py_cache__
+app/controllers/__pycache__/
+app/dtos/__pycache__/
+app/models/__pycache__/
+app/routes/__pycache__/
+app/services/__pycache__/
