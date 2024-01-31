@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 from routes.medicine_routes import medicine_bp
 from routes.patient_routes import patient_bp
@@ -14,3 +14,6 @@ routes_bp.register_blueprint(prescription_bp)
 # routes_bp.register_blueprint(medical_prescription_bp)
 
 # Add other routes
+@routes_bp.route('/')
+def index():
+    return render_template('index.html')

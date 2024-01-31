@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from config import config_by_name, db
 from routes import routes_bp
+from error_handler import error_handler_bp
 
 
 def create_app(config_name='development'):

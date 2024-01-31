@@ -1,8 +1,12 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 from controllers.medicine_controller import MedicineController
 
 medicine_bp = Blueprint('medicine', __name__, url_prefix='/medicine')
+
+@medicine_bp.route('/')
+def medicine_index():
+    return render_template('medicine.html')
 
 
 @medicine_bp.route('/get-all', methods=['GET'])
