@@ -7,7 +7,7 @@ Simple containerized vulnerable web app written in Flask.
 - **Docker Compose:** Tool for defining and running multi-container applications.
 
 ## Project structure
-![](ProjectStructure.gif)
+![](./app/static/images/ProjectStructure.gif)
 
 ## Requirements
 - [Docker](https://www.docker.com/)
