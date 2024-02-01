@@ -6,6 +6,9 @@ Simple containerized vulnerable web app written in Flask.
 - **Docker:** Tool that is used to automate the deployment of applications in lightweight containers so that applications can work efficiently in different environments in isolation.
 - **Docker Compose:** Tool for defining and running multi-container applications.
 
+## Project structure
+![](ProjectStructure.gif)
+
 ## Requirements
 - [Docker](https://www.docker.com/)
 - Modern web browser
