@@ -3,13 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 class DevelopmentConfig:
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://adgpoffice:gpoffice@172.20.10.7:5432/dbgpoffice'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://adgpoffice:gpoffice@192.168.1.48:5432/dbgpoffice'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class ProductionConfig:
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = 'postgresql://adgpoffice:gpoffice@172.20.10.7:5432/dbgpoffice'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://adgpoffice:gpoffice@192.168.1.48:5432/dbgpoffice'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 

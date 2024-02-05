@@ -1,17 +1,59 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPOffice</title>
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='imges/favicon.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/error-style.css') }}">
+<head> 
+    <meta charset="UTf-8">
+    <link rel="stylesheet" href="../static/css/card_style.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
-<body>
-    <h1>Helloo index</h1>
+    <body>
+    <div class="page">
+        <header>GP-Office</header>
 
-    <button id="myButton">Cliccaa per cambiare colore</button>
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-    
-</body>
+        <div id="nav-container">
+          <div class="bg"></div>
+          <div id="nav-bar" class="button" tabindex="0">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </div>
+
+          <div id="presentation-screen">
+            <h1>Benvenuto nel Nostro Sito</h1>
+            <p>Scopri il nostro mondo e trova ciò che stai cercando.</p>
+          </div>
+
+          <div id="nav-content" tabindex="0">
+            <ul>
+              <li><a href="/api/patient" onclick="route()" class="mostraSezione" data-target="sezione1">Patient</a></li> 
+              <li><a href="/api/medicine" onclick="route()" class="mostraSezione" data-target="sezione2">Medicine</a></li>
+              <li><a href="/api/prescription" onclick="route()" class="mostraSezione" data-target="sezione3">Prescription</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="sezione1" class="sezione">
+          <h1>Sezione 1</h1>
+          <p>Contenuto della Sezione 1.</p>
+        </div>
+      
+        <div id="sezione2" class="sezione">
+          <h2>Sezione 2</h2>
+          <p>Contenuto della Sezione 2.</p>
+        </div>
+      
+        <div id="sezione3" class="sezione">
+          <h2>Sezione 3</h2>
+          <p>Contenuto della Sezione 3.</p>
+        </div>
+      </div>
+
+      <script type="text/javascript" src="../static/js/script.js"></script>
+      <script src="../static/js/router.js"></script>
+      <script src="../static/js/services/medicine_service.js"></script>
+      <script src="../static/js/services/patient_service.js"></script>
+      <script src="../static/js/services/prescription_service.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    </body>
 </html>

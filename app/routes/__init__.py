@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, send_from_directory, redirect, url_for
+from flask import Blueprint, render_template, send_from_directory, redirect
 
 from routes.medicine_routes import medicine_bp
 from routes.patient_routes import patient_bp
@@ -12,7 +12,6 @@ routes_bp.register_blueprint(medicine_bp)
 routes_bp.register_blueprint(patient_bp)
 routes_bp.register_blueprint(prescription_bp)
 # routes_bp.register_blueprint(medical_prescription_bp)
-
 
 @routes_bp.route('/')
 def root():
