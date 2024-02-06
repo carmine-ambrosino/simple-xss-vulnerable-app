@@ -8,7 +8,7 @@
 *.vscode
 
 # Ignore pycache
-app/__py_cache__/
+app/__pycache__
 app/controllers/__pycache__/
 app/dtos/__pycache__/
 app/models/__pycache__/

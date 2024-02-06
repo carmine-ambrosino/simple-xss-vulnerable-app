@@ -1,0 +1,40 @@
+# -------------------------------------------------------
+# Docker Compose for development 
+# -------------------------------------------------------
+version: '3.8'
+
+services:
+  app:
+    build: ./app
+    hostname: application
+    ports:
+      - "5000:5000"
+    networks:
+      - appnet
+    volumes:
+      - ./app:/app
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16.1-alpine
+    environment:
+      POSTGRES_DB: dbgpoffice
+      POSTGRES_USER: superadmin
+      POSTGRES_PASSWORD: secretpassword
+    ports:
+      - "5432:5432"
+    networks:
+      - appnet
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/dbgpoffice.sql:/docker-entrypoint-initdb.d/dbgpoffice.sql
+
+networks:
+  appnet:
+
+volumes:
+  postgres_data:
+
+ 
+

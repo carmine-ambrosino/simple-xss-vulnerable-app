@@ -16,12 +16,13 @@ routes_bp.register_blueprint(prescription_bp)
 
 @routes_bp.route('/')
 def root():
-    return redirect('/api')
+    return redirect('/api/medicine')
 
 # Altre route nel blueprint
 @routes_bp.route('/api')
 def index():
     return render_template('index.html')
+
 
 
 @routes_bp.route('/static/<path:filename>')

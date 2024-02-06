@@ -1,5 +1,5 @@
 # -------------------------------------------------------
-# Docker Compose
+# Docker Compose for production
 # -------------------------------------------------------
 version: '3.8'
 
@@ -16,8 +16,9 @@ services:
       
   app:
     build: ./app
-    ports:
-      - "5000:5000"
+    hostname: application
+    expose:
+      - 5000
     networks:
       - appnet
     volumes:
@@ -31,8 +32,8 @@ services:
       POSTGRES_DB: dbgpoffice
       POSTGRES_USER: superadmin
       POSTGRES_PASSWORD: secretpassword
-    ports:
-      - "5432:5432"
+    expose:
+      - 5432
     networks:
       - appnet
     volumes:
