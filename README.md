@@ -1,4 +1,4 @@
-# simple-vulnerable-app - GP Office
+# simple-vulnerable-app 
 Simple containerized vulnerable web app written in Flask. 
 
 For example, you can test a cross-site scripting attack.
@@ -8,9 +8,9 @@ The app is designed to help general practitioners to manage their patients, pati
 The application is called ***"GP-Office"***, which stands for ***"General Pratictioner's Office"***.
 
 Some features of the application are listed below:
-- **Patient management:** General practitioner can add details about their patients, such as name, surname, social security number, or phone number.
+- **Patient management:** General practitioners can add details about their patients, such as name, surname, fiscal code or phone number.
 - **Medical prescription management:** For each patient, prescriptions can be entered, specifying the relevant medicine and quantity.
-- **Medicine management:** The application includes a database for medicine. Each entry in the database includes its name and description.
+- **Medicine management:** General practitioners can add, update or delete medicines.
 
 ## Used technologies
 - **Flask:** Lightweight micro web framework written in Python.
