@@ -26,3 +26,8 @@ def index():
 @routes_bp.route('/static/<path:filename>')
 def custom_static(filename):
     return send_from_directory(routes_bp.static_folder, filename)
+
+@routes_bp.route('/<path:dummy>')
+def fallback(dummy):
+    # Redirect when the path is incorrect 
+    return redirect('/api')

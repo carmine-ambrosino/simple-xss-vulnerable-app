@@ -9,7 +9,7 @@ const prescriptionFieldsName = ['dt', 'description']
 let allPatients = []
 let allMedicines = []
 
-function formatDate(date){
+function formatDate(date) {
     const provDate = new Date(date)
     const day = provDate.getDate();
     const month = provDate.getMonth()+1;
@@ -17,7 +17,7 @@ function formatDate(date){
     return day+"/"+month+"/"+year
 }
 
-function formatDateFromString(date){
+function formatDateFromString(date) {
     const split = date.split("/")
     const day = split[0]
     const month = split[1]
@@ -54,9 +54,8 @@ function getCard(card) {
 
     var cardTitle = document.createElement("h2");
     cardContent.appendChild(cardTitle);
-    
 
-    switch(type){
+    switch(type) {
         case 'medicine':
             cardTitle.textContent = card.name;
             var cardSubtitle = document.createElement("p");
@@ -101,7 +100,7 @@ function getCard(card) {
     cardActions.appendChild(editBtn);
     cardActions.appendChild(deleteBtn);
 
-    if(type === 'patient'){
+    if(type === 'patient') {
         var prescriptionBtn = createButton("Prescriptions", function () {
             const patientId = card.id
             data = data.filter((patient) => patient.id === card.id)[0].prescriptions
@@ -149,16 +148,16 @@ function deleteCard(id) {
     }
 }
 
-function getCardFields(){
+function getCardFields() {
     let arrayFields = []
-    switch(type){
+    switch(type) {
         case 'medicine': return medicineFieldsName;
         case 'patient': return patientFieldsName;
         case 'prescription': return prescriptionFieldsName;
     }
 }
 
-function getDeleteOperation(){
+function getDeleteOperation() {
     switch(type){
         case 'medicine': return deleteMedicine;
         case 'patient': return deletePatient;
@@ -166,7 +165,7 @@ function getDeleteOperation(){
     }
 }
 
-function getUpdateOperation(){
+function getUpdateOperation() {
     switch(type){
         case 'medicine': return updateMedicine;
         case 'patient': return updatePatient;
@@ -174,7 +173,7 @@ function getUpdateOperation(){
     }
 }
 
-function getInsertOperation(){
+function getInsertOperation() {
     switch(type){
         case 'medicine': return addMedicine;
         case 'patient': return addPatient;
@@ -182,7 +181,7 @@ function getInsertOperation(){
     }
 }
 
-function getCardData(){
+function getCardData() {
     switch(type){
         case 'medicine': return getAllMedicines;
         case 'patient': return getAllPatients;
@@ -198,7 +197,7 @@ function setModalContent(card = {}, modalTitle) {
         input.value = card[fieldName];
     }
 
-    if(type === 'prescription'){
+    if(type === 'prescription') {
         const dropdown = document.getElementsByName('patientDropdown')[0]
         dropdown.selectedIndex = findIndexByField(allPatients, 'id', card.patient_id)
         const prescription = data.filter((prescription) => prescription.id === card.id)[0]
@@ -263,7 +262,7 @@ function getModalInput(modalContentDiv, fieldName){
     modalContentDiv.appendChild(nameInput);
 }
 
-function getModalContainer(){
+function getModalContainer() {
     // Create the main modal div
     const modalDiv = document.createElement('div');
     modalDiv.id = 'modal';
@@ -273,7 +272,7 @@ function getModalContainer(){
     var modalContentDiv = document.createElement('div');
     modalContentDiv.className = 'modal-content';
 
-    if(type === 'prescription'){
+    if(type === 'prescription') {
         var dropdown = document.createElement('select');
         dropdown.name = 'patientDropdown';
         for(const patient of allPatients){
@@ -289,11 +288,11 @@ function getModalContainer(){
         modalContentDiv.appendChild(dropdown) 
     }
 
-    for (fieldName of getCardFields()){
+    for (fieldName of getCardFields()) {
         getModalInput(modalContentDiv, fieldName);
     }
     
-    if(type === 'prescription'){
+    if(type === 'prescription') {
         var medicineListContainer = document.createElement('div');
         medicineListContainer.class = 'medicine-list-container'
         for(const medicine of allMedicines){
@@ -343,7 +342,7 @@ function modalAction() {
     }
 
 
-    if(type === 'prescription'){
+    if(type === 'prescription') {
         const medicinesList = []
         for (const checkbox of document.getElementsByClassName('prescription-medicine-checkbox')){
             console.log(checkbox.checked)
@@ -383,7 +382,7 @@ function closeModal() {
     var modal = document.getElementById("modal");
     modal.style.display = "none";
 
-    for (const fieldName of getCardFields()){
+    for (const fieldName of getCardFields()) {
         document.getElementById(fieldName).value = "";
     }
 }
@@ -398,15 +397,15 @@ function editCard(id) {
     }
 }
 
-function renderCards(cardContainer){
-    const cardCont = cardContainer ||document.getElementById('card-container')
+function renderCards(cardContainer) {
+    const cardCont = cardContainer || document.getElementById('card-container')
     cardCont.innerHTML = ""
-    for(const elem of data){
+    for(const elem of data) {
         cardCont.appendChild(getCard(elem))
     }
 }
 
-function getCrudControls(){
+function getCrudControls() {
     const crudCards = document.createElement('div');
     crudCards.class = "crud-cards"
     const controls = document.createElement('div');
@@ -460,7 +459,7 @@ function getCrudControls(){
 </div>
 */
 
-async function handleMedicineRoute(){
+async function handleMedicineRoute() {
     contentContainer.innerHTML = ""
     type = "medicine"
     data = await getAllMedicines()
@@ -468,7 +467,7 @@ async function handleMedicineRoute(){
     contentContainer.appendChild(getModalContainer())
 }
 
-async function handlePatientRoute(){
+async function handlePatientRoute() {
     contentContainer.innerHTML = ""
     type = "patient"
     data = await getAllPatients()
@@ -483,10 +482,10 @@ async function handlePrescriptionRoute(){
     allPatients = await getAllPatients()
     allMedicines = await getAllMedicines()
     let tempData = []
-    if (!comingFromPatient){
-        for (const patient of allPatients){
+    if (!comingFromPatient) {
+        for (const patient of allPatients) {
             console.log(patient)
-            for (const prescription of patient.prescriptions){
+            for (const prescription of patient.prescriptions) {
                 console.log(prescription)
                 prescription.patient_id = patient.id
                 prescription.patient_name = patient.name +" "+ patient.surname
@@ -495,7 +494,7 @@ async function handlePrescriptionRoute(){
         }
         console.log(tempData)
         data = tempData;
-    }else{
+    } else {
         comingFromPatient = false;
     }
     console.log(data)
@@ -511,9 +510,35 @@ const routes_function = {
 }
 
 
+// const handleLocation = async () => {
+//     const path = window.location.pathname;
+//     console.log(path)
+//     const routeHandler = routes_function[path];
+    
+//     if (routeHandler && typeof routeHandler === "function") {
+//         await routeHandler();
+//     } else {
+//         console.error(`Handler for route '${path}' not found or not a function.`);
+//     }
+//     //routes_function[path]()
+
+//     /*const html = await fetch(route).then((data) => data.text());
+//     document.getElementById("main-page").innerHTML = html;
+//     */
+// };
+
 const handleLocation = async () => {
     const path = window.location.pathname;
     console.log(path)
+
+    // redirect to '/api' whenever refreshing the page
+    window.onbeforeunload = function() { 
+        window.setTimeout(function () { 
+            window.location.href = '/api';
+        }, 0); 
+        window.onbeforeunload = null; // necessary to prevent infinite loop, that kills your browser 
+    }
+    
     const routeHandler = routes_function[path];
     
     if (routeHandler && typeof routeHandler === "function") {
@@ -521,11 +546,6 @@ const handleLocation = async () => {
     } else {
         console.error(`Handler for route '${path}' not found or not a function.`);
     }
-    //routes_function[path]()
-
-    /*const html = await fetch(route).then((data) => data.text());
-    document.getElementById("main-page").innerHTML = html;
-    */
 };
 
 window.onpopstate = handleLocation;
