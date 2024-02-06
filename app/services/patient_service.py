@@ -60,7 +60,7 @@ class PatientService:
     @staticmethod
     def create_patient(name, surname, dt_birth, fiscal_code, phone):
         try:
-            if len(fiscal_code)==16 and len(phone)==9 and name and surname:
+            if len(fiscal_code)==16 and len(phone)==10 and name and surname:
                 new_patient = Patient(name=name, surname=surname, dt_birth=dt_birth, fiscal_code=fiscal_code, phone=phone)
                 db.session.add(new_patient)
                 db.session.commit()
