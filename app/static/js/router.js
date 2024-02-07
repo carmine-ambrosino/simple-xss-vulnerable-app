@@ -8,6 +8,7 @@ const patientFieldsName = ['name', 'surname', 'dt_birth', 'fiscal_code', 'phone'
 const prescriptionFieldsName = ['dt', 'description']
 let allPatients = []
 let allMedicines = []
+let tempData = []; 
 
 function formatDate(date) {
     const provDate = new Date(date)
@@ -18,6 +19,7 @@ function formatDate(date) {
 }
 
 function formatDateFromString(date) {
+    console.log(date)
     const split = date.split("/")
     const day = split[0]
     const month = split[1]
@@ -45,7 +47,7 @@ const routes = {
     "/lorem": "/pages/lorem.html",
 };
 
-function getCard(card) {
+/*function getCard(card) {
     var cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
 
@@ -106,7 +108,7 @@ function getCard(card) {
             data = data.filter((patient) => patient.id === card.id)[0].prescriptions
             data = data.map((prescription) => {prescription.patient_id=card.id; prescription.patient_name = card.name + " " + card.surname; return prescription})
             comingFromPatient = true;
-            window.history.pushState({}, "", '/prescription');
+            window.history.pushState({}, "", '/api/prescription');
             handleLocation();
         }); 
         cardActions.appendChild(prescriptionBtn);
@@ -116,6 +118,86 @@ function getCard(card) {
     cardDiv.appendChild(cardActions);
 
     return cardDiv
+}*/
+
+function getCard(card) {
+    var cardDiv = document.createElement("div");
+    cardDiv.classList.add("card");
+
+    var cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+
+    var cardTitle = document.createElement("h2");
+    cardContent.appendChild(cardTitle);
+
+    switch(type) {
+        case 'medicine':
+            cardTitle.textContent = card.name;
+            var cardSubtitle = document.createElement("p");
+            cardSubtitle.textContent = card.description;       
+            cardContent.appendChild(cardSubtitle);
+            break;
+        case 'patient':
+            cardTitle.textContent = card.name + " " + card.surname;
+            var cardSubtitle1 = document.createElement("p");
+            cardSubtitle1.textContent = formatDate(card.dt_birth);  
+            cardContent.appendChild(cardSubtitle1);
+            var cardSubtitle2 = document.createElement("p");
+            cardSubtitle2.textContent = card.fiscal_code;  
+            cardContent.appendChild(cardSubtitle2);
+            var cardSubtitle3 = document.createElement("p");
+            cardSubtitle3.textContent = card.phone;  
+            cardContent.appendChild(cardSubtitle3)
+            break;
+        case 'prescription':
+            cardTitle.textContent = formatDate(card.dt);
+            var cardSubtitle1 = document.createElement("p");
+            cardSubtitle1.textContent = card.patient_name;  
+            cardContent.appendChild(cardSubtitle1);
+            var cardSubtitle2 = document.createElement("p");
+            cardSubtitle2.textContent = card.description;  
+            cardContent.appendChild(cardSubtitle2);
+            if (card.medicines && card.medicines.length > 0) {
+                var cardSubtitle3 = document.createElement("p");
+                cardSubtitle3.textContent = card.medicines.map((medicine) => medicine.name).join(", ");
+                cardContent.appendChild(cardSubtitle3);
+            } else {
+                var cardSubtitle3 = document.createElement("p");
+                cardSubtitle3.textContent = "No medicines prescribed";
+                cardContent.appendChild(cardSubtitle3);
+            }
+            break;
+    }
+
+    var cardActions = document.createElement("div");
+    cardActions.classList.add("card-actions");
+
+    var editBtn = createButton("Edit", function () {
+        editCard(card.id);
+    });
+    var deleteBtn = createButton("Delete", function () {
+        deleteCard(card.id);
+    });
+
+    cardActions.appendChild(editBtn);
+    cardActions.appendChild(deleteBtn);
+
+    if(type === 'patient') {
+        var prescriptionBtn = createButton("Prescriptions", function () {
+            const patientId = card.id
+            data = data.filter((patient) => patient.id === card.id)[0].prescriptions
+            data = data.map((prescription) => {prescription.patient_id=card.id; prescription.patient_name = card.name + " " + card.surname; return prescription})
+            comingFromPatient = true;
+            window.history.pushState({}, "", '/api/prescription');
+            handleLocation();
+        }); 
+        cardActions.appendChild(prescriptionBtn);
+    }
+
+    cardDiv.appendChild(cardContent);
+    cardDiv.appendChild(cardActions);
+
+    return cardDiv;
 }
 
 function createButton(label, handler) {
@@ -194,7 +276,7 @@ function setModalContent(card = {}, modalTitle) {
     console.log(card)
     for(const fieldName of getCardFields()){
         const input = document.getElementById(fieldName);
-        input.value = card[fieldName];
+        input.value = (fieldName === 'dt' || fieldName ==='dt_birth')?formatDate(card[fieldName]):card[fieldName]; 
     }
 
     if(type === 'prescription') {
@@ -223,28 +305,120 @@ function openEditCardModal(card) {
     modal.style.display = "block";
 }
 
-function searchCards() {
-    var searchTerm = document.getElementById("searchInput").value.toLowerCase();
+    function searchCards() {
+        var searchTerm = document.getElementById("searchInput").value.toLowerCase().trim();
 
-    if (searchTerm.trim() !== "") {
-        data = data.filter(function (card) {
-            return card.name.toLowerCase().includes(searchTerm);
-        });
-
-        document.getElementById("backBtn").disabled = false;
-        document.getElementById("addRowBtn").disabled = true;
-    }
-
-    renderCards();
+        if (searchTerm !== "") {
+            data = data.filter(function (card) {
+                if (type === 'prescription') {
+                    // For prescription cards, check if the formatted date, patient name, or description matches the search term
+                    return formatDate(card.dt).includes(searchTerm) || card.patient_name.toLowerCase().includes(searchTerm) || card.description.toLowerCase().includes(searchTerm);
+                }else if(type === 'patient') {
+                    // For other card types, only check if the card title matches the search term
+                    return card.name.toLowerCase().includes(searchTerm) || card.surname.toLowerCase().includes(searchTerm) || card.fiscal_code.toLowerCase().includes(searchTerm);
+                } else {
+                    // For other card types, only check if the card title matches the search term
+                    return card.name.toLowerCase().includes(searchTerm);
+                }
+            });   
+            document.getElementById("backBtn").disabled = false;
+            document.getElementById("addRowBtn").disabled = true;
+        } else {
+            // If the search term is empty, reset the data to its original state
+            switch(type) {
+                case 'medicine':
+                    data = allMedicines;
+                    break;
+                case 'patient':
+                    data = allPatients;
+                    break;
+                case 'prescription':
+                    data = tempData;
+                    break;
+            }
+        }    
+        renderCards(); 
 }
 
-async function goBack() {
+/*async function goBack() {
     document.getElementById("searchInput").value = "";
     data = await getCardData()()
     document.getElementById("backBtn").disabled = true;
     document.getElementById("addRowBtn").disabled = false;
     renderCards()
+}*/
+
+/* async function goBack() {
+    document.getElementById("searchInput").value = "";
+    switch(type) {
+        case 'medicine':
+            data = await getAllMedicines();
+            break;
+        case 'patient':
+            data = await getAllPatients();
+            break;
+        case 'prescription':
+            // Assign data to the original prescription data stored in tempData
+            data = tempData || [];
+            break;
+        default:
+            console.error("Invalid type:", type);
+            break;
+    }
+    document.getElementById("backBtn").disabled = true;
+    document.getElementById("addRowBtn").disabled = false;
+    renderCards();
+}*/
+
+async function goBack() {
+    // Reset the search input
+    document.getElementById("searchInput").value = "";
+
+    // Reset the data based on the current type and scenario
+    switch (type) {
+        case 'medicine':
+            data = await getAllMedicines();
+            break;
+        case 'patient':
+            if (comingFromPatient) {
+                // If coming from a patient card, show only prescriptions of that patient
+                const patientId = window.location.pathname.split("/").pop();
+                const patient = allPatients.find(patient => patient.id === patientId);
+                if (patient) {
+                    data = patient.prescriptions.map(prescription => ({
+                        ...prescription,
+                        patient_id: patient.id,
+                        patient_name: patient.name + " " + patient.surname
+                    }));
+                } else {
+                    console.error("Patient not found.");
+                    data = [];
+                }
+            } else {
+                // Otherwise, show all patients
+                data = await getAllPatients();
+            }
+            break;
+        case 'prescription':
+            // Assign data to the original prescription data stored in tempData
+            data = tempData || [];
+            break;
+        default:
+            console.error("Invalid type:", type);
+            break;
+    }
+
+    // Reset the comingFromPatient flag
+    comingFromPatient = false;
+
+    // Disable the back button and enable the addRow button
+    document.getElementById("backBtn").disabled = true;
+    document.getElementById("addRowBtn").disabled = false;
+
+    // Render the cards with the updated data
+    renderCards();
 }
+
 
 function getModalInput(modalContentDiv, fieldName){
     var nameLabel = document.createElement('label');
@@ -333,16 +507,18 @@ function getModalContainer() {
     return modalDiv
 
 }
-
 function modalAction() {
-
     updatedCard = {}
     for (const fieldName of getCardFields()){
-        updatedCard[fieldName] = document.getElementById(fieldName).value;
+        if(fieldName === 'dt' || fieldName === 'dt_birth'){
+            console.log(document.getElementById(fieldName).value)
+            updatedCard[fieldName] = formatDateFromString(document.getElementById(fieldName).value)   
+        }else{
+            updatedCard[fieldName] = document.getElementById(fieldName).value;
+        }
     }
 
-
-    if(type === 'prescription') {
+    if(type === 'prescription'){
         const medicinesList = []
         for (const checkbox of document.getElementsByClassName('prescription-medicine-checkbox')){
             console.log(checkbox.checked)
@@ -353,7 +529,6 @@ function modalAction() {
         updatedCard.medicines = medicinesList
         const patientSelect = document.getElementsByName("patientDropdown")[0]
         updatedCard.id_patient = allPatients[patientSelect.selectedIndex].id
-        updatedCard.dt = formatDateFromString(updatedCard.dt)
     }
 
     console.log(updatedCard)
@@ -374,8 +549,7 @@ function modalAction() {
     }
 
     renderCards();
-    closeModal();
-    
+    closeModal();    
 }
 
 function closeModal() {
@@ -417,7 +591,9 @@ function getCrudControls() {
     const searchBtn = document.createElement('button');
     searchBtn.id = 'searchBtn'
     searchBtn.appendChild(document.createTextNode('Search'));
-    searchBtn.addEventListener('click', () => console.log("Mi ha cliccato"))
+    //searchBtn.addEventListener('click', () => console.log("Mi ha cliccato"))
+    searchBtn.id = 'searchBtn';
+    searchBtn.textContent = 'Search';
     const backBtn = document.createElement('button');
     backBtn.id = 'backBtn'
     backBtn.disabled = 'true'
@@ -476,32 +652,29 @@ async function handlePatientRoute() {
     contentContainer.appendChild(getModalContainer())
 }
 
-async function handlePrescriptionRoute(){
-    contentContainer.innerHTML = ""
-    type = "prescription"
-    allPatients = await getAllPatients()
-    allMedicines = await getAllMedicines()
-    let tempData = []
+async function handlePrescriptionRoute() {
+    contentContainer.innerHTML = "";
+    type = "prescription";
+    allPatients = await getAllPatients();
+    allMedicines = await getAllMedicines();
+
     if (!comingFromPatient) {
+        tempData = [];
         for (const patient of allPatients) {
-            console.log(patient)
             for (const prescription of patient.prescriptions) {
-                console.log(prescription)
-                prescription.patient_id = patient.id
-                prescription.patient_name = patient.name +" "+ patient.surname
+                prescription.patient_id = patient.id;
+                prescription.patient_name = patient.name + " " + patient.surname;
             }
-            tempData = tempData.concat(patient.prescriptions)
+            tempData = tempData.concat(patient.prescriptions);
         }
-        console.log(tempData)
         data = tempData;
     } else {
-        comingFromPatient = false;
+        comingFromPatient = false; // Resetta il flag
     }
-    console.log(data)
-    contentContainer.appendChild(getCrudControls(data))
-    contentContainer.appendChild(getModalContainer())
-}
 
+    contentContainer.appendChild(getCrudControls(data));
+    contentContainer.appendChild(getModalContainer());
+}
 
 const routes_function = {
     "/api/medicine": handleMedicineRoute,
@@ -509,8 +682,7 @@ const routes_function = {
     "/api/prescription": handlePrescriptionRoute,
 }
 
-
-// const handleLocation = async () => {
+/* const handleLocation = async () => {
 //     const path = window.location.pathname;
 //     console.log(path)
 //     const routeHandler = routes_function[path];
@@ -524,20 +696,20 @@ const routes_function = {
 
 //     /*const html = await fetch(route).then((data) => data.text());
 //     document.getElementById("main-page").innerHTML = html;
-//     */
-// };
+//     
+// };*/
 
 const handleLocation = async () => {
     const path = window.location.pathname;
     console.log(path)
 
     // redirect to '/api' whenever refreshing the page
-    window.onbeforeunload = function() { 
+    /*window.onbeforeunload = function() { 
         window.setTimeout(function () { 
             window.location.href = '/api';
         }, 0); 
         window.onbeforeunload = null; // necessary to prevent infinite loop, that kills your browser 
-    }
+    }*/
     
     const routeHandler = routes_function[path];
     
