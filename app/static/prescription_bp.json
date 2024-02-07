@@ -1,0 +1,11 @@
+{
+    "name": "prescription",
+    "url_prefix": "/api/prescription",
+    "routes": [
+      {"endpoint": "prescription_index", "methods": ["GET"], "url": "/"},
+      {"endpoint": "get_all_prescriptions", "methods": ["GET"], "url": "/get-all"},
+      {"endpoint": "get_prescription_by_id", "methods": ["GET"], "url": "/<string:prescription_id>"},
+      {"endpoint": "delete_prescription_by_id", "methods": ["DELETE"], "url": "/<string:prescription_id>"},
+      {"endpoint": "create_or_update_prescription", "methods": ["POST"], "url": ""}
+    ]
+}

@@ -4,11 +4,6 @@ from controllers.medicine_controller import MedicineController
 
 medicine_bp = Blueprint('medicine', __name__, url_prefix='/api/medicine')
 
-@medicine_bp.route('/')
-def medicine_index():
-    return render_template('medicine.html')
-
-
 @medicine_bp.route('/get-all', methods=['GET'])
 def get_all_medicines():
     return MedicineController.get_all_medicines()

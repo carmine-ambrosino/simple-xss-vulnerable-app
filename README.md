@@ -30,7 +30,7 @@ git clone https://github.com/carmine-ambrosino/simple-vulnerable-app.git
 cd simple-vulnerable-app
 
 # Production Mode
-docker compose -f docker-compose-prod.yml up -d
+docker compose up -d
 ```
 > **Note:** If you want to modify this sorce code, you can use the following command to enter in development mode:
 ``` bash

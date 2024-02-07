@@ -28,7 +28,9 @@ body {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
+    margin-top: 20px; 
     margin-bottom: 20px;
+    margin-right: 20px; 
     padding: 20px;
     box-sizing: border-box;
     transition: transform 0.3s ease-in-out;
