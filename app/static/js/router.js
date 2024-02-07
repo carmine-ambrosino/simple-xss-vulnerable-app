@@ -40,13 +40,6 @@ const route = (event) => {
     handleLocation();
 };
 
-const routes = {
-    404: "/index.html",
-    "/": "/pages/index.html",
-    "/medicine": "/pages/about.html",
-    "/lorem": "/pages/lorem.html",
-};
-
 /*function getCard(card) {
     var cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
@@ -676,46 +669,44 @@ async function handlePrescriptionRoute() {
     contentContainer.appendChild(getModalContainer());
 }
 
+        function handleHomeRoute(){
+            contentContainer.innerHTML = ""
+            var titleContainer = document.createElement("h1");
+            titleContainer.textContent = "Benvenuto nel Nostro Sito";
+            var paragraphContainer = document.createElement("p");
+            paragraphContainer.textContent = ">Scopri il nostro mondo e trova ciò che stai cercando.";  
+            contentContainer.appendChild(titleContainer);
+            contentContainer.appendChild(paragraphContainer);
+        }
+
+
 const routes_function = {
+    "/": handleHomeRoute,
+    "/api": handleHomeRoute,
     "/api/medicine": handleMedicineRoute,
     "/api/patient": handlePatientRoute,
     "/api/prescription": handlePrescriptionRoute,
 }
 
-/* const handleLocation = async () => {
-//     const path = window.location.pathname;
-//     console.log(path)
-//     const routeHandler = routes_function[path];
-    
-//     if (routeHandler && typeof routeHandler === "function") {
-//         await routeHandler();
-//     } else {
-//         console.error(`Handler for route '${path}' not found or not a function.`);
-//     }
-//     //routes_function[path]()
-
-//     /*const html = await fetch(route).then((data) => data.text());
-//     document.getElementById("main-page").innerHTML = html;
-//     
-// };*/
-
-const handleLocation = async () => {
+const handleLocation = () => {
     const path = window.location.pathname;
     console.log(path)
-
+   
     // redirect to '/api' whenever refreshing the page
-    /*window.onbeforeunload = function() { 
+    window.onbeforeunload = function() { 
         window.setTimeout(function () { 
             window.location.href = '/api';
         }, 0); 
         window.onbeforeunload = null; // necessary to prevent infinite loop, that kills your browser 
-    }*/
-    
+    }
+
     const routeHandler = routes_function[path];
     
     if (routeHandler && typeof routeHandler === "function") {
-        await routeHandler();
+        routeHandler();
     } else {
+        window.history.pushState({}, "", "/api");
+        handleHomeRoute();
         console.error(`Handler for route '${path}' not found or not a function.`);
     }
 };
