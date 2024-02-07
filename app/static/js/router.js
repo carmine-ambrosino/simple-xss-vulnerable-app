@@ -135,7 +135,10 @@ function getCard(card) {
       //   var cardSubtitle = document.createElement("p");
       //   cardSubtitle.textContent = card.description;
       //   cardContent.appendChild(cardSubtitle);
-      cardTitle.textContent = card.name;
+      var cardTitle = document.createElement("div");
+      cardTitle.innerHTML = "<h3>" + card.name +"</h3>"
+      // cardTitle.textContent = card.name;
+      cardContent.appendChild(cardTitle);
       var cardSubtitle = document.createElement("div");
       cardSubtitle.innerHTML = "<p>" + card.description + "</p>";
       cardContent.appendChild(cardSubtitle);
