@@ -17,3 +17,5 @@ app/services/__pycache__/
 
 # Ignore DS_Store file
 *.DS_Store
+# Ignore desktop.ini
+*desktop.ini
