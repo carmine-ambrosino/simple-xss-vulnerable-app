@@ -54,6 +54,11 @@ body {
   }
 }
 
+.controls{
+  align-items: center;
+  justify-content: center;
+}
+
 .controls input {
   padding: 17px; /* Adjust padding to make it bigger */
   width: 500px; /* Set a longer width */

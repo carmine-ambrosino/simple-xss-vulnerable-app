@@ -2,6 +2,8 @@
 <html lang="it">
   <head>
     <meta charset="UTf-8" />
+    <title>GP-Office</title>
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico" />
     <link rel="stylesheet" href="../static/css/card_style.css" />
     <script
       defer
@@ -15,15 +17,12 @@
     <script src="../static/js/services/prescription_service.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <div class="page">
-      <header>GP-Office</header>
+      <header>
+        General Practitioner's Office
+      </header>
 
       <div id="nav-container">
         <div class="bg"></div>
-        <!-- <div id="nav-bar" class="button" tabindex="0">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </div> -->
         <button id="nav-bar" class="button icon-button" tabindex="0">
           <img
             class="icon-image"
@@ -53,13 +52,16 @@
               </a>
             </li>
             <li>
+              
               <a
                 href="/api/medicine"
                 onclick="route()"
                 class="mostraSezione"
                 data-target="sezione2"
-                >Medicine</a
               >
+              <img src="../static/images/icons/medicine.png" alt="Medicine icon" width="20px" height="20px" margin="10px">  
+              Medicine
+            </a>
             </li>
             <li>
               <a
@@ -67,8 +69,10 @@
                 onclick="route()"
                 class="mostraSezione"
                 data-target="sezione3"
-                >Prescription</a
-              >
+                >
+                <img src="../static/images/icons/prescription-nav.png" alt="Prescription icon" width="20px" height="20px" margin="10px">
+                Prescription
+                </a>
             </li>
           </ul>
         </div>
