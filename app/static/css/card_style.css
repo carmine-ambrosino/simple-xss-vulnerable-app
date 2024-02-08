@@ -82,7 +82,7 @@ body {
   border: 1px solid #3f51b5;
 }
 
-.modal {
+/*.modal {
   display: none;
   position: fixed;
   top: 0;
@@ -98,6 +98,52 @@ body {
   padding: 20px;
   border: 1px solid #888;
   width: 50%;
+}*/
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/*.modal-content {
+  background-color: #fefefe;
+  position: absolute; 
+  top: 50%;            
+  left: 50%;           
+  transform: translate(-50%, -50%); 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  max-width: 500px;    
+}*/
+.modal-content {
+  background-color: #fefefe;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  max-width: 500px;
+  display: grid; /* Imposta il display a griglia */
+  grid-template-columns: 1fr 1fr; /* Divide il contenitore in due colonne di larghezza uguale */
+  gap: 5px; /* Aggiunge uno spazio tra le colonne */
+}
+
+.modal-content label {
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 5px; /* Riduce lo spazio sotto le label */
+}
+
+.modal-content input {
+  margin-bottom: 5px; /* Riduce lo spazio sotto gli input */
 }
 
 .close {
@@ -111,3 +157,9 @@ body {
 .close:hover {
   color: black;
 }
+
+.form-group {
+  display: block;
+  margin-bottom: 10px; /* Aggiungi spazio tra gli elementi */
+}
+

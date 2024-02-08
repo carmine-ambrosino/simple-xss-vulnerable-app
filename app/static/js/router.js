@@ -249,14 +249,12 @@ function setModalContent(card = {}, modalTitle) {
       card.patient_id
     );
     const prescription = data.filter(
-      (prescription) => prescription.id === card.id
-    )[0];
+      (prescription) => prescription.id === card.id)[0];
     for (const medicine of prescription.medicines) {
       const checkbox = document.getElementById(medicine.id);
       checkbox.checked = true;
     }
   }
-
   document.getElementById("modalActionButton").textContent = modalTitle;
 }
 
@@ -273,7 +271,7 @@ function openEditCardModal(card) {
   modal.style.display = "block";
 }
 
-function searchCards() {
+/*function searchCards() {
   var searchTerm = document
     .getElementById("searchInput")
     .value.toLowerCase()
@@ -317,7 +315,50 @@ function searchCards() {
     }
   }
   renderCards();
+}*/
+
+function searchCards() {
+  var searchTerm = document
+    .getElementById("searchInput")
+    .value.toLowerCase()
+    .trim();
+
+  // Check if the search term is empty
+  if (searchTerm === "") {
+    // If the search term is empty, do nothing and return
+    return;
+  }
+
+  // Perform the search only if the search term is not empty
+  data = data.filter(function (card) {
+    if (type === "prescription") {
+      // For prescription cards, check if the formatted date, patient name, or description matches the search term
+      return (
+        formatDate(card.dt).includes(searchTerm) ||
+        card.patient_name.toLowerCase().includes(searchTerm) ||
+        card.description.toLowerCase().includes(searchTerm)
+      );
+    } else if (type === "patient") {
+      // For other card types, only check if the card title matches the search term
+      return (
+        card.name.toLowerCase().includes(searchTerm) ||
+        card.surname.toLowerCase().includes(searchTerm) ||
+        card.fiscal_code.toLowerCase().includes(searchTerm)
+      );
+    } else {
+      // For other card types, only check if the card title matches the search term
+      return card.name.toLowerCase().includes(searchTerm);
+    }
+  });
+
+  // Enable the back button and disable the addRow button
+  document.getElementById("backBtn").disabled = false;
+  document.getElementById("addRowBtn").disabled = true;
+
+  // Render the cards with the updated data
+  renderCards();
 }
+
 
 async function goBack() {
   // Reset the search input
@@ -369,20 +410,29 @@ async function goBack() {
 }
 
 function getModalInput(modalContentDiv, fieldName) {
-  var nameLabel = document.createElement("label");
-  nameLabel.setAttribute("for", fieldName);
-  nameLabel.textContent = fieldName;
+    var nameLabel = document.createElement("label");
+    nameLabel.setAttribute("for", fieldName);
+    nameLabel.textContent = fieldName;
+    nameLabel.classList.add("form-group");
+  
+    // Create the Name input
+    var nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.id = fieldName;
+    nameInput.classList.add("field-value"); 
+    if (fieldName === "dt" || fieldName === "dt_birth") {
+      nameInput.placeholder = "YYYY/MM/GG"; // Modificato per includere il formato desiderato
+    } else {
+      nameInput.placeholder = "Enter " + fieldName;
+    }
+    nameLabel.style.display = "inline-block";
+    nameInput.style.display = "inline-block";
+    nameInput.style.marginLeft = "10px"; // Aggiungi un margine tra label e input
+    nameInput.style.marginRight = "10px";
 
-  // Create the Name input
-  var nameInput = document.createElement("input");
-  nameInput.type = "text";
-  nameInput.id = fieldName;
-  nameInput.class = "field-value";
-  nameInput.placeholder = "Enter " + fieldName;
-
-  modalContentDiv.appendChild(nameLabel);
-  modalContentDiv.appendChild(nameInput);
-}
+    modalContentDiv.appendChild(nameLabel);
+    modalContentDiv.appendChild(nameInput);
+  }
 
 function getModalContainer() {
   // Create the main modal div
@@ -454,6 +504,7 @@ function getModalContainer() {
   modalDiv.appendChild(modalContentDiv);
   return modalDiv;
 }
+
 function modalAction() {
   updatedCard = {};
   for (const fieldName of getCardFields()) {
@@ -466,7 +517,6 @@ function modalAction() {
       updatedCard[fieldName] = document.getElementById(fieldName).value;
     }
   }
-
   if (type === "prescription") {
     const medicinesList = [];
     for (const checkbox of document.getElementsByClassName(
