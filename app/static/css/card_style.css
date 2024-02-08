@@ -13,7 +13,6 @@ body {
 
 .controls {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
@@ -56,8 +55,9 @@ body {
 }
 
 .controls input {
-  padding: 16px; /* Adjust padding to make it bigger */
-  width: 400px; /* Set a longer width */
+  padding: 17px; /* Adjust padding to make it bigger */
+  width: 500px; /* Set a longer width */
+  margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -67,14 +67,14 @@ body {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
 }
 
-/* Style for the search button */
-.controls #searchBtn {
-  padding: 16px 32px; /* Adjust padding to make it bigger and wider */
-  background-color: #3f51b5;
-  color: #fff;
-  margin-right: 450px; /* Adjust the margin to control the distance */
+.controls button:hover{
+  transform: scale(1.2);
+  border: 1px solid #3f51b5;
 }
 
 .modal {
