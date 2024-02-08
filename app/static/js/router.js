@@ -102,10 +102,10 @@ function getCard(card) {
   var cardActions = document.createElement("div");
   cardActions.classList.add("card-actions");
 
-  var editBtn = createButton("Edit", function () {
+  var editBtn = createButton("../static/images/icons/edit.png", function () {
     editCard(card.id);
   });
-  var deleteBtn = createButton("Delete", function () {
+  var deleteBtn = createButton("../static/images/icons/delete.png", function () {
     deleteCard(card.id);
   });
 
@@ -113,7 +113,7 @@ function getCard(card) {
   cardActions.appendChild(deleteBtn);
 
   if (type === "patient") {
-    var prescriptionBtn = createButton("Prescriptions", function () {
+    var prescriptionBtn = createButton("../static/images/icons/prescription.png", function () {
       const patientId = card.id;
       data = data.filter((patient) => patient.id === card.id)[0].prescriptions;
       data = data.map((prescription) => {
@@ -134,12 +134,22 @@ function getCard(card) {
   return cardDiv;
 }
 
-function createButton(label, handler) {
+function createButton(imagePath, handler) {
   var button = document.createElement("button");
-  button.textContent = label;
+  button.style.backgroundImage = "url('" + imagePath + "')";
+  button.style.backgroundSize = "cover";
+  button.style.width = "25px"; // Set icon width
+  button.style.height = "25px"; // Set icon height
+  button.style.border = "1px solid #ccc"; // Add border to the button
+  button.style.marginRight = "10px"; // Set right margin
+  button.style.cursor = "pointer"; // Change cursor on hover 
+  button.style.padding = "12px"; // Add padding to the button
+  button.style.borderRadius = "4px"; // Set border radius to make it round
+  button.style.backgroundColor = "white" //Set background color
   button.addEventListener("click", handler);
   return button;
 }
+
 
 function editCard(id) {
   var card = data.find(function (item) {
