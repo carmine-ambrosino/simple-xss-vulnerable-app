@@ -1,6 +1,6 @@
 * {
-    margin: 0;
-    padding: 0;
+    margin: 10px;
+    padding: 5px;
     box-sizing: border-box;
 }
 
@@ -35,7 +35,7 @@ h1{
 }
 
 .error-container a {
-    color: #007bff;
+    color: #3F51B5;
     text-decoration: none;
 }
 

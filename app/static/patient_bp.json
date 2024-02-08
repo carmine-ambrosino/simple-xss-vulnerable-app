@@ -1,0 +1,12 @@
+{
+    "name": "patient",
+    "url_prefix": "/api/patient",
+    "routes": [
+      {"endpoint": "patient_index", "methods": ["GET"], "url": "/"},
+      {"endpoint": "get_all_patients", "methods": ["GET"], "url": "/get-all"},
+      {"endpoint": "get_patient_by_id", "methods": ["GET"], "url": "/<string:patient_id>"},
+      {"endpoint": "delete_patient_by_id", "methods": ["DELETE"], "url": "/<string:patient_id>"},
+      {"endpoint": "create_or_update_patient", "methods": ["POST"], "url": ""},
+      {"endpoint": "get_patient_complete_info", "methods": ["GET"], "url": "/get-all-info"}
+    ]
+}

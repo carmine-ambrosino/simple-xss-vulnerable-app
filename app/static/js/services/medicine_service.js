@@ -1,50 +1,78 @@
-const apiEndpoint = "http://127.0.0.1:5000/api"
-const medicineBaseUrl = apiEndpoint + "/medicine"
-
-async function getAllMedicines(){
-    const resp = await axios.get(medicineBaseUrl+"/get-all")
-    return resp.data 
+async function getAllMedicines() {
+    try {
+      // Upload JSON representation of the blueprint
+      const response = await fetch('../static/medicine_bp.json');
+      const blueprintData = await response.json();
+  
+      // Extract base URL from JSON
+      const medicineBaseUrl = blueprintData.url_prefix;
+  
+      // Full URL for the request
+      const apiUrl = medicineBaseUrl + '/get-all';
+  
+      // Execute HTTP request using dynamic URL
+      const resp = await axios.get(apiUrl);
+  
+      // Return data obtained from request
+      return resp.data;
+    } catch (error) {
+      console.error('Error getAllMedicines:', error);
+      throw error;
+    }
 }
 
-// async function getAllMedicines() {
-//     try {
-//       // Carica la rappresentazione JSON del blueprint
-//       const response = await fetch('../static/medicine_bp.json');
-//       const blueprintData = await response.json();
-  
-//       // Estrai l'URL base dal JSON
-//       const medicineBaseUrl1 = blueprintData.url_prefix;
-  
-//       // Costruisci l'URL completo per la richiesta
-//       const apiUrl = medicineBaseUrl1 + '/get-all';
-  
-//       // Esegui la richiesta HTTP usando l'URL dinamico
-//       const resp = await axios.get(apiUrl);
-  
-//       // Restituisci i dati ottenuti dalla richiesta
-//       return resp.data;
-//     } catch (error) {
-//       console.error('Errore durante la richiesta di getAllMedicines:', error);
-//       throw error; // Puoi gestire l'errore in modo appropriato o propagarlo
-//     }
-//   }
+async function addMedicine(medicine) {
+    try {
+        const response = await fetch('../static/medicine_bp.json');
+        const blueprintData = await response.json();
+   
+        const medicineBaseUrl = blueprintData.url_prefix;
 
-async function addMedicine(medicine){
-    const resp = await axios.post(medicineBaseUrl, medicine)
-    return resp.data
+        const apiUrl = medicineBaseUrl;
+
+        const resp = await axios.post(apiUrl, medicine);
+
+        return resp.data;
+      } catch (error) {
+        console.error('Error addMedicine:', error);
+        throw error; 
+      }
 }
 
-async function updateMedicine(medicine){
-    const resp = await axios.post(medicineBaseUrl, medicine)
-    return resp.data
+async function updateMedicine(medicine) {
+    try {
+        const response = await fetch('../static/medicine_bp.json');
+        const blueprintData = await response.json();
+   
+        const medicineBaseUrl = blueprintData.url_prefix;
+
+        const apiUrl = medicineBaseUrl;
+
+        const resp = await axios.post(apiUrl, medicine);
+
+        return resp.data;
+      } catch (error) {
+        console.error('Error updateMedicine:', error);
+        throw error; 
+      }
 }
 
-async function deleteMedicine(medicineId){
-    const resp = await axios.delete(medicineBaseUrl+'/'+medicineId)
-    return resp.data
+async function deleteMedicine(medicineId) {
+    try {
+        const response = await fetch('../static/medicine_bp.json');
+        const blueprintData = await response.json();
+   
+        const medicineBaseUrl = blueprintData.url_prefix;
+
+        const apiUrl = medicineBaseUrl;
+
+        const resp = await axios.delete(apiUrl+'/'+medicineId);
+
+        return resp.data;
+      } catch (error) {
+        console.error('Error deleteMedicine:', error);
+        throw error; 
+      }
 }
-
-
-
 
 
