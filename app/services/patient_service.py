@@ -67,7 +67,7 @@ class PatientService:
                 return new_patient, 'Patient created'  # Return new patient and none (NO ERROR)
             elif len(fiscal_code)!=16:
                 return False, 'Insert a valid fiscal code'
-            elif len(phone)!=9:
+            elif len(phone)!=10:
                 return False, 'Insert a valid phone number'
             elif not name or not surname:
                 return False, 'Make sure that all fields are filled in'
@@ -88,7 +88,7 @@ class PatientService:
             return False, 'Patient not found'
 
         try:
-            if len(fiscal_code)==16 and len(phone)==9:
+            if len(fiscal_code)==16 and len(phone)==10:
                 if name:
                     patient.name = name
                 if surname:
@@ -103,7 +103,7 @@ class PatientService:
                 return patient, 'Patient updated'
             elif len(fiscal_code)!=16:
                 return False, 'Insert a valid fiscal code'
-            elif len(phone)!=9:
+            elif len(phone)!=10:
                 return False, 'Insert a valid phone number'
         except ValueError:
             db.session.rollback()
