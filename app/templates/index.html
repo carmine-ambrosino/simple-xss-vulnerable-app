@@ -1,61 +1,96 @@
 <!DOCTYPE html>
 <html lang="it">
-<head> 
-    <meta charset="UTf-8">
-    <link rel="stylesheet" href="../static/css/card_style.css">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
-    <link rel="stylesheet" href="../static/css/style.css">
-</head>
-    <body>
-      <script src="../static/js/services/medicine_service.js"></script>
-      <script src="../static/js/services/patient_service.js"></script>
-      <script src="../static/js/services/prescription_service.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <head>
+    <meta charset="UTf-8" />
+    <link rel="stylesheet" href="../static/css/card_style.css" />
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
+    ></script>
+    <link rel="stylesheet" href="../static/css/style.css" />
+  </head>
+  <body>
+    <script src="../static/js/services/medicine_service.js"></script>
+    <script src="../static/js/services/patient_service.js"></script>
+    <script src="../static/js/services/prescription_service.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <div class="page">
-        <header>GP-Office</header>
+      <header>GP-Office</header>
 
-        <div id="nav-container">
-          <div class="bg"></div>
-          <!-- <div id="nav-bar" class="button" tabindex="0">
+      <div id="nav-container">
+        <div class="bg"></div>
+        <!-- <div id="nav-bar" class="button" tabindex="0">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </div> -->
-          <button id="nav-bar" class="button icon-button" tabindex="0">
-            <img class="icon-image" src="../static/images/menu.png" alt="Menu">
-          </button>
+        <button id="nav-bar" class="button icon-button" tabindex="0">
+          <img
+            class="icon-image"
+            src="../static/images/icons/menu.png"
+            alt="Menu"
+          />
+        </button>
 
-          <div id="presentation-screen">
-            
-          </div>
+        <div id="presentation-screen"></div>
 
-          <div id="nav-content" tabindex="0">
-            <ul>
-              <li><a href="/api/patient" onclick="route()" class="mostraSezione" data-target="sezione1">Patient</a></li> 
-              <li><a href="/api/medicine" onclick="route()" class="mostraSezione" data-target="sezione2">Medicine</a></li>
-              <li><a href="/api/prescription" onclick="route()" class="mostraSezione" data-target="sezione3">Prescription</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div id="sezione1" class="sezione">
-          <h1>Sezione 1</h1>
-          <p>Contenuto della Sezione 1.</p>
-        </div>
-      
-        <div id="sezione2" class="sezione">
-          <h2>Sezione 2</h2>
-          <p>Contenuto della Sezione 2.</p>
-        </div>
-      
-        <div id="sezione3" class="sezione">
-          <h2>Sezione 3</h2>
-          <p>Contenuto della Sezione 3.</p>
+        <div id="nav-content" tabindex="0">
+          <ul>
+            <li>
+              <a
+                href="/api/patient"
+                onclick="route()"
+                class="mostraSezione"
+                data-target="sezione1"
+              >
+                <img
+                  src="../static/images/icons/patient.png"
+                  alt="patient-icon"
+                  width="20px"
+                  height="20px"
+                />
+                Patient
+              </a>
+            </li>
+            <li>
+              <a
+                href="/api/medicine"
+                onclick="route()"
+                class="mostraSezione"
+                data-target="sezione2"
+                >Medicine</a
+              >
+            </li>
+            <li>
+              <a
+                href="/api/prescription"
+                onclick="route()"
+                class="mostraSezione"
+                data-target="sezione3"
+                >Prescription</a
+              >
+            </li>
+          </ul>
         </div>
       </div>
 
-      <script type="text/javascript" src="../static/js/script.js"></script>
-      <script src="../static/js/router.js"></script>
+      <div id="sezione1" class="sezione">
+        <h1>Sezione 1</h1>
+        <p>Contenuto della Sezione 1.</p>
+      </div>
 
-    </body>
+      <div id="sezione2" class="sezione">
+        <h2>Sezione 2</h2>
+        <p>Contenuto della Sezione 2.</p>
+      </div>
+
+      <div id="sezione3" class="sezione">
+        <h2>Sezione 3</h2>
+        <p>Contenuto della Sezione 3.</p>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="../static/js/script.js"></script>
+    <script src="../static/js/router.js"></script>
+  </body>
 </html>
