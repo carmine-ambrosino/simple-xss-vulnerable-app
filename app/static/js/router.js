@@ -105,26 +105,33 @@ function getCard(card) {
   var editBtn = createButton("../static/images/icons/edit.png", function () {
     editCard(card.id);
   });
-  var deleteBtn = createButton("../static/images/icons/delete.png", function () {
-    deleteCard(card.id);
-  });
+  var deleteBtn = createButton(
+    "../static/images/icons/delete.png",
+    function () {
+      deleteCard(card.id);
+    }
+  );
 
   cardActions.appendChild(editBtn);
   cardActions.appendChild(deleteBtn);
 
   if (type === "patient") {
-    var prescriptionBtn = createButton("../static/images/icons/prescription.png", function () {
-      const patientId = card.id;
-      data = data.filter((patient) => patient.id === card.id)[0].prescriptions;
-      data = data.map((prescription) => {
-        prescription.patient_id = card.id;
-        prescription.patient_name = card.name + " " + card.surname;
-        return prescription;
-      });
-      comingFromPatient = true;
-      window.history.pushState({}, "", "/api/prescription");
-      handleLocation();
-    });
+    var prescriptionBtn = createButton(
+      "../static/images/icons/prescription.png",
+      function () {
+        const patientId = card.id;
+        data = data.filter((patient) => patient.id === card.id)[0]
+          .prescriptions;
+        data = data.map((prescription) => {
+          prescription.patient_id = card.id;
+          prescription.patient_name = card.name + " " + card.surname;
+          return prescription;
+        });
+        comingFromPatient = true;
+        window.history.pushState({}, "", "/api/prescription");
+        handleLocation();
+      }
+    );
     cardActions.appendChild(prescriptionBtn);
   }
 
@@ -142,14 +149,13 @@ function createButton(imagePath, handler) {
   button.style.height = "25px"; // Set icon height
   button.style.border = "1px solid #ccc"; // Add border to the button
   button.style.marginRight = "10px"; // Set right margin
-  button.style.cursor = "pointer"; // Change cursor on hover 
+  button.style.cursor = "pointer"; // Change cursor on hover
   button.style.padding = "12px"; // Add padding to the button
   button.style.borderRadius = "4px"; // Set border radius to make it round
-  button.style.backgroundColor = "white" //Set background color
+  button.style.backgroundColor = "white"; //Set background color
   button.addEventListener("click", handler);
   return button;
 }
-
 
 function editCard(id) {
   var card = data.find(function (item) {
@@ -592,14 +598,17 @@ function getCrudControls() {
   input.placeholder = "Search";
   const searchBtn = document.createElement("button");
   searchBtn.id = "searchBtn";
-  searchBtn.innerHTML = '<img src="../static/images/icons/search.png" alt="Search" width="17px" height="17px">';
+  searchBtn.innerHTML =
+    '<img src="../static/images/icons/search.png" alt="Search" width="17px" height="17px">';
   const backBtn = document.createElement("button");
   backBtn.id = "backBtn";
   backBtn.disabled = true;
-  backBtn.innerHTML = '<img src="../static/images/icons/back.png" alt="Back" width="17px" height="17px">';
+  backBtn.innerHTML =
+    '<img src="../static/images/icons/back.png" alt="Back" width="17px" height="17px">';
   const addRowBtn = document.createElement("button");
   addRowBtn.id = "addRowBtn";
-  addRowBtn.innerHTML = '<img src="../static/images/icons/add.png" alt="Add Card" width="17px" height="17px">';
+  addRowBtn.innerHTML =
+    '<img src="../static/images/icons/add.png" alt="Add Card" width="17px" height="17px">';
 
   searchBtn.addEventListener("click", searchCards);
   backBtn.addEventListener("click", goBack);
@@ -622,7 +631,6 @@ function getCrudControls() {
   return crudCards;
 }
 
-
 async function handleMedicineRoute() {
   contentContainer.innerHTML = "";
   type = "medicine";
@@ -631,6 +639,13 @@ async function handleMedicineRoute() {
   const page = document.createElement("h1");
   page.textContent = "Medicines";
   page.style.textAlign = "center";
+  // Create image
+  const image = document.createElement("img");
+  image.src = "../static/images/icons/medicine.png";
+  image.alt = "Patients icon";
+  image.width = "25";
+  image.height = "27";
+  contentContainer.appendChild(image);
   contentContainer.appendChild(page);
 
   contentContainer.appendChild(getCrudControls(data));
@@ -646,6 +661,15 @@ async function handlePatientRoute() {
   const page = document.createElement("h1");
   page.textContent = "Patients";
   page.style.textAlign = "center";
+
+  // Create image
+  const image = document.createElement("img");
+  image.src = "../static/images/icons/patient.png";
+  image.alt = "Patients icon";
+  image.width = "25";
+  image.height = "27";
+
+  contentContainer.appendChild(image);
   contentContainer.appendChild(page);
 
   contentContainer.appendChild(getCrudControls(data));
@@ -675,6 +699,14 @@ async function handlePrescriptionRoute() {
   const page = document.createElement("h1");
   page.textContent = "Prescriptions";
   page.style.textAlign = "center";
+  // Create image
+  const image = document.createElement("img");
+  image.src = "../static/images/icons/prescription-nav.png";
+  image.alt = "Patients icon";
+  image.width = "25";
+  image.height = "27";
+
+  contentContainer.appendChild(image);
   contentContainer.appendChild(page);
 
   contentContainer.appendChild(getCrudControls(data));
@@ -683,11 +715,20 @@ async function handlePrescriptionRoute() {
 
 function handleHomeRoute() {
   contentContainer.innerHTML = "";
+
   var titleContainer = document.createElement("h1");
   titleContainer.textContent = "Welcome Doctor!";
   var paragraphContainer = document.createElement("p");
-  paragraphContainer.textContent =
-    "GP-Office is here for you.";
+  paragraphContainer.textContent = "GP-Office is here for you.";
+
+  // Create image
+  const image = document.createElement("img");
+  image.src = "../static/images/gpofficelogo.png";
+  image.alt = "Patients icon";
+  image.width = "250";
+  image.height = "250";
+
+  contentContainer.appendChild(image);
   contentContainer.appendChild(titleContainer);
   contentContainer.appendChild(paragraphContainer);
 }
