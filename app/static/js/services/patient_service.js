@@ -11,7 +11,7 @@ async function getAllPatients() {
   
       return resp.data;
     } catch (error) {
-      console.error('Errore durante la richiesta di getAllPatients:', error);
+      console.error('Errore getAllPatients:', error);
       throw error; 
     }
 }
@@ -29,7 +29,7 @@ async function addPatient(patient) {
 
         return resp.data;
       } catch (error) {
-        console.error('Errore durante la richiesta di addPatient:', error);
+        console.error('Error addPatient:', error);
         throw error; 
       }
 }
@@ -47,7 +47,7 @@ async function updatePatient(patient) {
 
       return resp.data;
     } catch (error) {
-      console.error('Errore durante la richiesta di updatePatient:', error);
+      console.error('Error updatePatient:', error);
       throw error; 
     }
 }
@@ -65,7 +65,7 @@ async function deletePatient(patientId) {
 
         return resp.data;
       } catch (error) {
-        console.error('Errore durante la richiesta di deletePatient:', error);
+        console.error('Error deletePatient:', error);
         throw error; 
       }
 }

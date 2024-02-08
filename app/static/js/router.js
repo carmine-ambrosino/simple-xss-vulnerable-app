@@ -46,79 +46,6 @@ const route = (event) => {
   handleLocation();
 };
 
-/*function getCard(card) {
-    var cardDiv = document.createElement("div");
-    cardDiv.classList.add("card");
-
-    var cardContent = document.createElement("div");
-    cardContent.classList.add("card-content");
-
-    var cardTitle = document.createElement("h2");
-    cardContent.appendChild(cardTitle);
-
-    switch(type) {
-        case 'medicine':
-            cardTitle.textContent = card.name;
-            var cardSubtitle = document.createElement("p");
-            cardSubtitle.textContent = card.description;       
-            cardContent.appendChild(cardSubtitle);
-            break;
-        case 'patient':
-            cardTitle.textContent = card.name + " " + card.surname;
-            var cardSubtitle1 = document.createElement("p");         
-            cardSubtitle1.textContent = formatDate(card.dt_birth);  
-            cardContent.appendChild(cardSubtitle1);
-            var cardSubtitle2 = document.createElement("p");
-            cardSubtitle2.textContent = card.fiscal_code;  
-            cardContent.appendChild(cardSubtitle2);
-            var cardSubtitle3 = document.createElement("p");
-            cardSubtitle3.textContent = card.phone;  
-            cardContent.appendChild(cardSubtitle3)
-            break;
-        case 'prescription':
-            cardTitle.textContent = formatDate(card.dt);
-            var cardSubtitle1 = document.createElement("p");
-            cardSubtitle1.textContent = card.patient_name;  
-            cardContent.appendChild(cardSubtitle1);
-            var cardSubtitle2 = document.createElement("p");
-            cardSubtitle2.textContent = card.description;  
-            cardContent.appendChild(cardSubtitle2);
-            var cardSubtitle3 = document.createElement("p");
-            cardSubtitle3.textContent = card.medicines.map((medicine) => medicine.name).join(", ")  
-            cardContent.appendChild(cardSubtitle3);
-    }
-
-    var cardActions = document.createElement("div");
-    cardActions.classList.add("card-actions");
-
-    var editBtn = createButton("Edit", function () {
-        editCard(card.id);
-    });
-    var deleteBtn = createButton("Delete", function () {
-        deleteCard(card.id);
-    });
-
-    cardActions.appendChild(editBtn);
-    cardActions.appendChild(deleteBtn);
-
-    if(type === 'patient') {
-        var prescriptionBtn = createButton("Prescriptions", function () {
-            const patientId = card.id
-            data = data.filter((patient) => patient.id === card.id)[0].prescriptions
-            data = data.map((prescription) => {prescription.patient_id=card.id; prescription.patient_name = card.name + " " + card.surname; return prescription})
-            comingFromPatient = true;
-            window.history.pushState({}, "", '/api/prescription');
-            handleLocation();
-        }); 
-        cardActions.appendChild(prescriptionBtn);
-    }
-
-    cardDiv.appendChild(cardContent);
-    cardDiv.appendChild(cardActions);
-
-    return cardDiv
-}*/
-
 function getCard(card) {
   var cardDiv = document.createElement("div");
   cardDiv.classList.add("card");
@@ -126,36 +53,18 @@ function getCard(card) {
   var cardContent = document.createElement("div");
   cardContent.classList.add("card-content");
 
-  var cardTitle = document.createElement("h2");
+  var cardTitle = document.createElement("div");
   cardContent.appendChild(cardTitle);
 
   switch (type) {
     case "medicine":
-      //   cardTitle.textContent = card.name;
-      //   var cardSubtitle = document.createElement("p");
-      //   cardSubtitle.textContent = card.description;
-      //   cardContent.appendChild(cardSubtitle);
-      var cardTitle = document.createElement("div");
-      cardTitle.innerHTML = "<h3>" + card.name +"</h3>"
-      // cardTitle.textContent = card.name;
-      cardContent.appendChild(cardTitle);
+      cardTitle.innerHTML = "<h2>" + card.name + "</h2>";
       var cardSubtitle = document.createElement("div");
       cardSubtitle.innerHTML = "<p>" + card.description + "</p>";
       cardContent.appendChild(cardSubtitle);
       break;
     case "patient":
-      //   cardTitle.textContent = card.name + " " + card.surname;
-      //   var cardSubtitle1 = document.createElement("div");
-      //   cardSubtitle1.textContent = formatDate(card.dt_birth);
-      //   cardContent.appendChild(cardSubtitle1);
-      //   var cardSubtitle2 = document.createElement("p");
-      //   cardSubtitle2.textContent = card.fiscal_code;
-      //   cardContent.appendChild(cardSubtitle2);
-      //   var cardSubtitle3 = document.createElement("p");
-      //   cardSubtitle3.textContent = card.phone;
-      //   cardContent.appendChild(cardSubtitle3);
-
-      cardTitle.textContent = card.name + " " + card.surname;
+      cardTitle.innerHTML = "<h2>" + card.name + " " + card.surname + "</h2>";
       var cardSubtitle1 = document.createElement("div");
       cardSubtitle1.innerHTML = "<p>" + formatDate(card.dt_birth) + "</p>";
       cardContent.appendChild(cardSubtitle1);
@@ -165,26 +74,9 @@ function getCard(card) {
       var cardSubtitle3 = document.createElement("div");
       cardSubtitle3.innerHTML = "<p>" + card.phone + "</p>";
       cardContent.appendChild(cardSubtitle3);
+
       break;
     case "prescription":
-      //   cardTitle.textContent = formatDate(card.dt);
-      //   var cardSubtitle1 = document.createElement("p");
-      //   cardSubtitle1.textContent = card.patient_name;
-      //   cardContent.appendChild(cardSubtitle1);
-      //   var cardSubtitle2 = document.createElement("p");
-      //   cardSubtitle2.textContent = card.description;
-      //   cardContent.appendChild(cardSubtitle2);
-      //   if (card.medicines && card.medicines.length > 0) {
-      //     var cardSubtitle3 = document.createElement("p");
-      //     cardSubtitle3.textContent = card.medicines
-      //       .map((medicine) => medicine.name)
-      //       .join(", ");
-      //     cardContent.appendChild(cardSubtitle3);
-      //   } else {
-      //     var cardSubtitle3 = document.createElement("p");
-      //     cardSubtitle3.textContent = "No medicines prescribed";
-      //     cardContent.appendChild(cardSubtitle3);
-      //   }
       cardTitle.innerHTML = formatDate(card.dt);
       var cardSubtitle1 = document.createElement("div");
       cardSubtitle1.innerHTML = "<p>" + card.patient_name + "</p>";
@@ -417,36 +309,6 @@ function searchCards() {
   renderCards();
 }
 
-/*async function goBack() {
-    document.getElementById("searchInput").value = "";
-    data = await getCardData()()
-    document.getElementById("backBtn").disabled = true;
-    document.getElementById("addRowBtn").disabled = false;
-    renderCards()
-}*/
-
-/* async function goBack() {
-    document.getElementById("searchInput").value = "";
-    switch(type) {
-        case 'medicine':
-            data = await getAllMedicines();
-            break;
-        case 'patient':
-            data = await getAllPatients();
-            break;
-        case 'prescription':
-            // Assign data to the original prescription data stored in tempData
-            data = tempData || [];
-            break;
-        default:
-            console.error("Invalid type:", type);
-            break;
-    }
-    document.getElementById("backBtn").disabled = true;
-    document.getElementById("addRowBtn").disabled = false;
-    renderCards();
-}*/
-
 async function goBack() {
   // Reset the search input
   document.getElementById("searchInput").value = "";
@@ -671,7 +533,6 @@ function getCrudControls() {
   const searchBtn = document.createElement("button");
   searchBtn.id = "searchBtn";
   searchBtn.appendChild(document.createTextNode("Search"));
-  //searchBtn.addEventListener('click', () => console.log("Mi ha cliccato"))
   searchBtn.id = "searchBtn";
   searchBtn.textContent = "Search";
   const backBtn = document.createElement("button");
@@ -759,10 +620,10 @@ async function handlePrescriptionRoute() {
 function handleHomeRoute() {
   contentContainer.innerHTML = "";
   var titleContainer = document.createElement("h1");
-  titleContainer.textContent = "Benvenuto nel Nostro Sito";
+  titleContainer.textContent = "Welcome Doctor!";
   var paragraphContainer = document.createElement("p");
   paragraphContainer.textContent =
-    ">Scopri il nostro mondo e trova ciò che stai cercando.";
+    "GP-Office is here for you.";
   contentContainer.appendChild(titleContainer);
   contentContainer.appendChild(paragraphContainer);
 }

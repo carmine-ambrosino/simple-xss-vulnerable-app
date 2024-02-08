@@ -72,7 +72,7 @@ body {
   /* Style for the search button */
   .controls #searchBtn {
     padding: 16px 32px; /* Adjust padding to make it bigger and wider */
-    background-color: #007bff;
+    background-color: #3F51B5;
     color: #fff;
     margin-right: 450px; /* Adjust the margin to control the distance */
   }

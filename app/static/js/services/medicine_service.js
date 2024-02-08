@@ -1,23 +1,23 @@
 async function getAllMedicines() {
     try {
-      // Carica la rappresentazione JSON del blueprint
+      // Upload JSON representation of the blueprint
       const response = await fetch('../static/medicine_bp.json');
       const blueprintData = await response.json();
   
-      // Estrai l'URL base dal JSON
+      // Extract base URL from JSON
       const medicineBaseUrl = blueprintData.url_prefix;
   
-      // Costruisci l'URL completo per la richiesta
+      // Full URL for the request
       const apiUrl = medicineBaseUrl + '/get-all';
   
-      // Esegui la richiesta HTTP usando l'URL dinamico
+      // Execute HTTP request using dynamic URL
       const resp = await axios.get(apiUrl);
   
-      // Restituisci i dati ottenuti dalla richiesta
+      // Return data obtained from request
       return resp.data;
     } catch (error) {
-      console.error('Errore durante la richiesta di getAllMedicines:', error);
-      throw error; // Puoi gestire l'errore in modo appropriato o propagarlo
+      console.error('Error getAllMedicines:', error);
+      throw error;
     }
 }
 
@@ -34,7 +34,7 @@ async function addMedicine(medicine) {
 
         return resp.data;
       } catch (error) {
-        console.error('Errore durante la richiesta di addMedicine:', error);
+        console.error('Error addMedicine:', error);
         throw error; 
       }
 }
@@ -52,7 +52,7 @@ async function updateMedicine(medicine) {
 
         return resp.data;
       } catch (error) {
-        console.error('Errore durante la richiesta di updateMedicine:', error);
+        console.error('Error updateMedicine:', error);
         throw error; 
       }
 }
@@ -70,7 +70,7 @@ async function deleteMedicine(medicineId) {
 
         return resp.data;
       } catch (error) {
-        console.error('Errore durante la richiesta di deleteMedicine:', error);
+        console.error('Error deleteMedicine:', error);
         throw error; 
       }
 }

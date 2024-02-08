@@ -11,7 +11,7 @@ async function getAllPrescriptions() {
   
       return resp.data;
     } catch (error) {
-      console.error('Errore durante la richiesta di getAllPrescriptions:', error);
+      console.error('Error getAllPrescriptions:', error);
       throw error; 
     }
 }
@@ -29,7 +29,7 @@ async function addPrescription(prescription) {
 
         return resp.data;
       } catch (error) {
-        console.error('Errore durante la richiesta di addPrescription:', error);
+        console.error('Error addPrescription:', error);
         throw error; 
       }
 }
@@ -47,7 +47,7 @@ async function updatePrescription(prescription) {
 
         return resp.data;
       } catch (error) {
-        console.error('Errore durante la richiesta di updatePrescription:', error);
+        console.error('Error updatePrescription:', error);
         throw error; 
       }
 }
@@ -65,7 +65,7 @@ async function deletePrescription(prescriptionId) {
 
         return resp.data;
       } catch (error) {
-        console.error('Errore durante la richiesta di deletePrescription:', error);
+        console.error('Error deletePrescription:', error);
         throw error; 
       }
 }
