@@ -20,7 +20,7 @@ body {
 #card-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .card {
@@ -61,7 +61,7 @@ body {
 
 .controls input {
   padding: 17px; /* Adjust padding to make it bigger */
-  width: 500px; /* Set a longer width */
+  width: 200px; /* Set a longer width */
   margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
