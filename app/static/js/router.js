@@ -132,6 +132,7 @@ function getCard(card) {
         handleLocation();
       }
     );
+
     cardActions.appendChild(prescriptionBtn);
   }
 
@@ -153,9 +154,11 @@ function createButton(imagePath, handler) {
   button.style.padding = "12px"; // Add padding to the button
   button.style.borderRadius = "4px"; // Set border radius to make it round
   button.style.backgroundColor = "white"; //Set background color
+
   button.addEventListener("click", handler);
   return button;
 }
+
 
 function editCard(id) {
   var card = data.find(function (item) {
@@ -598,6 +601,7 @@ function getCrudControls() {
   input.placeholder = "Search";
   const searchBtn = document.createElement("button");
   searchBtn.id = "searchBtn";
+
   searchBtn.innerHTML =
     '<img src="../static/images/icons/search.png" alt="Search" width="17px" height="17px">';
   const backBtn = document.createElement("button");
@@ -639,6 +643,7 @@ async function handleMedicineRoute() {
   const page = document.createElement("h1");
   page.textContent = "Medicines";
   page.style.textAlign = "center";
+
   // Create image
   const image = document.createElement("img");
   image.src = "../static/images/icons/medicine.png";
@@ -646,6 +651,7 @@ async function handleMedicineRoute() {
   image.width = "25";
   image.height = "27";
   contentContainer.appendChild(image);
+
   contentContainer.appendChild(page);
 
   contentContainer.appendChild(getCrudControls(data));
@@ -661,6 +667,7 @@ async function handlePatientRoute() {
   const page = document.createElement("h1");
   page.textContent = "Patients";
   page.style.textAlign = "center";
+
 
   // Create image
   const image = document.createElement("img");
@@ -699,6 +706,7 @@ async function handlePrescriptionRoute() {
   const page = document.createElement("h1");
   page.textContent = "Prescriptions";
   page.style.textAlign = "center";
+
   // Create image
   const image = document.createElement("img");
   image.src = "../static/images/icons/prescription-nav.png";
