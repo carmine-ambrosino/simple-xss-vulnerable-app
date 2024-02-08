@@ -1,0 +1,12 @@
+{
+    "name": "medicine",
+    "url_prefix": "/api/medicine",
+    "routes": [
+      {"endpoint": "medicine_index", "methods": ["GET"], "url": "/"},
+      {"endpoint": "get_all_medicines", "methods": ["GET"], "url": "/get-all"},
+      {"endpoint": "get_medicine_by_id", "methods": ["GET"], "url": "/<string:medicine_id>"},
+      {"endpoint": "delete_medicine_by_id", "methods": ["DELETE"], "url": "/<string:medicine_id>"},
+      {"endpoint": "create_or_update_medicine", "methods": ["POST"], "url": ""}
+    ]
+}
+  

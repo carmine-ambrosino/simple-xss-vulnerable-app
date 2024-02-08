@@ -1,26 +1,71 @@
-const patientBaseUrl = apiEndpoint + "/patient"
+async function getAllPatients() {
+    try {
+      const response = await fetch('../static/patient_bp.json');
+      const blueprintData = await response.json();
+  
+      const patientBaseUrl = blueprintData.url_prefix;
+  
+      const apiUrl = patientBaseUrl + '/get-all-info';
 
-async function getAllPatients(){
-    const resp = await axios.get(patientBaseUrl+"/get-all-info")
-    return resp.data 
+      const resp = await axios.get(apiUrl);
+  
+      return resp.data;
+    } catch (error) {
+      console.error('Errore getAllPatients:', error);
+      throw error; 
+    }
 }
 
-async function addPatient(patient){
-    const resp = await axios.post(patientBaseUrl, patient)
-    return resp.data
+async function addPatient(patient) {
+    try {
+        const response = await fetch('../static/patient_bp.json');
+        const blueprintData = await response.json();
+   
+        const patientBaseUrl = blueprintData.url_prefix;
+
+        const apiUrl = patientBaseUrl;
+
+        const resp = await axios.post(apiUrl, patient);
+
+        return resp.data;
+      } catch (error) {
+        console.error('Error addPatient:', error);
+        throw error; 
+      }
 }
 
-async function updatePatient(patient){
-    const resp = await axios.post(patientBaseUrl, patient)
-    return resp.data
+async function updatePatient(patient) {
+    try {
+      const response = await fetch('../static/patient_bp.json');
+      const blueprintData = await response.json();
+
+      const patientBaseUrl = blueprintData.url_prefix;
+
+      const apiUrl = patientBaseUrl;
+
+      const resp = await axios.post(apiUrl, patient);
+
+      return resp.data;
+    } catch (error) {
+      console.error('Error updatePatient:', error);
+      throw error; 
+    }
 }
 
-async function deletePatient(patientId){
-    const resp = await axios.delete(patientBaseUrl+'/'+patientId)
-    return resp.data
+async function deletePatient(patientId) {
+    try {
+        const response = await fetch('../static/patient_bp.json');
+        const blueprintData = await response.json();
+   
+        const patientBaseUrl = blueprintData.url_prefix;
+
+        const apiUrl = patientBaseUrl;
+
+        const resp = await axios.delete(apiUrl+'/'+patientId);
+
+        return resp.data;
+      } catch (error) {
+        console.error('Error deletePatient:', error);
+        throw error; 
+      }
 }
-
-
-
-
-
