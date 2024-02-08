@@ -123,6 +123,9 @@ main > div {
 
 #presentation-screen {
   margin: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 /* #nav-content.hidden,
