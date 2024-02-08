@@ -577,6 +577,12 @@ async function handleMedicineRoute() {
   contentContainer.innerHTML = "";
   type = "medicine";
   data = await getAllMedicines();
+
+  const page = document.createElement("h1");
+  page.textContent = "Medicines";
+  page.style.textAlign = "center";
+  contentContainer.appendChild(page);
+
   contentContainer.appendChild(getCrudControls(data));
   contentContainer.appendChild(getModalContainer());
 }
@@ -586,6 +592,12 @@ async function handlePatientRoute() {
   type = "patient";
   data = await getAllPatients();
   console.log(data);
+
+  const page = document.createElement("h1");
+  page.textContent = "Patients";
+  page.style.textAlign = "center";
+  contentContainer.appendChild(page);
+
   contentContainer.appendChild(getCrudControls(data));
   contentContainer.appendChild(getModalContainer());
 }
@@ -607,8 +619,13 @@ async function handlePrescriptionRoute() {
     }
     data = tempData;
   } else {
-    comingFromPatient = false; // Resetta il flag
+    comingFromPatient = false; // Flag Reset
   }
+
+  const page = document.createElement("h1");
+  page.textContent = "Prescriptions";
+  page.style.textAlign = "center";
+  contentContainer.appendChild(page);
 
   contentContainer.appendChild(getCrudControls(data));
   contentContainer.appendChild(getModalContainer());
