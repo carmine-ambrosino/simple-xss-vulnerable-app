@@ -23,11 +23,13 @@ header {
   position: fixed;
   width: 100%;
   height: 70px;
+  font-size: 30px;
   background: #3f51b5;
   color: #fff;
   justify-content: center;
   align-items: center;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
 }
 
 main {
@@ -100,17 +102,6 @@ main > div {
   margin-left: 10px;
 }
 
-/* .icon-bar {
-  display: block;
-  width: 100%;
-  height: 3px;
-  background: #ffffff;
-  transition: .3s;
-}
-.icon-bar + .icon-bar {
-  margin-top: 5px;
-} */
-
 #nav-content {
   margin-top: 70px;
   padding: 20px;
@@ -120,13 +111,14 @@ main > div {
   top: 0;
   left: 0;
   height: calc(100% - 70px);
-  background: #ececec;
+  background: #fafafa;
   pointer-events: auto;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   transform: translateX(-100%);
   transition: transform 0.3s ease;
   will-change: transform;
   contain: paint;
+  box-shadow: 10px 10px 10px -5px rgba(0, 0, 0, 0.5);
 }
 
 #presentation-screen {
@@ -162,8 +154,8 @@ main > div {
 }
 
 #nav-content li a:hover {
-  color: #ffffff;
-  background: #969595;
+  color: black;
+  background: #f0f0f0;
 }
 
 #nav-container:focus-within #nav-content {
