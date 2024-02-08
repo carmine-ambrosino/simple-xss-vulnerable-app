@@ -102,10 +102,10 @@ function getCard(card) {
   var cardActions = document.createElement("div");
   cardActions.classList.add("card-actions");
 
-  var editBtn = createButton("Edit", function () {
+  var editBtn = createButton("../static/images/icons/edit.png", function () {
     editCard(card.id);
   });
-  var deleteBtn = createButton("Delete", function () {
+  var deleteBtn = createButton("../static/images/icons/delete.png", function () {
     deleteCard(card.id);
   });
 
@@ -113,7 +113,7 @@ function getCard(card) {
   cardActions.appendChild(deleteBtn);
 
   if (type === "patient") {
-    var prescriptionBtn = createButton("Prescriptions", function () {
+    var prescriptionBtn = createButton("../static/images/icons/prescription.png", function () {
       const patientId = card.id;
       data = data.filter((patient) => patient.id === card.id)[0].prescriptions;
       data = data.map((prescription) => {
@@ -134,12 +134,22 @@ function getCard(card) {
   return cardDiv;
 }
 
-function createButton(label, handler) {
+function createButton(imagePath, handler) {
   var button = document.createElement("button");
-  button.textContent = label;
+  button.style.backgroundImage = "url('" + imagePath + "')";
+  button.style.backgroundSize = "cover";
+  button.style.width = "25px"; // Set icon width
+  button.style.height = "25px"; // Set icon height
+  button.style.border = "1px solid #ccc"; // Add border to the button
+  button.style.marginRight = "10px"; // Set right margin
+  button.style.cursor = "pointer"; // Change cursor on hover 
+  button.style.padding = "12px"; // Add padding to the button
+  button.style.borderRadius = "4px"; // Set border radius to make it round
+  button.style.backgroundColor = "white" //Set background color
   button.addEventListener("click", handler);
   return button;
 }
+
 
 function editCard(id) {
   var card = data.find(function (item) {
@@ -523,25 +533,23 @@ function renderCards(cardContainer) {
 
 function getCrudControls() {
   const crudCards = document.createElement("div");
-  crudCards.class = "crud-cards";
+  crudCards.className = "crud-cards";
   const controls = document.createElement("div");
-  controls.class = "controls";
+  controls.className = "controls";
   const input = document.createElement("input");
   input.type = "text";
   input.id = "searchInput";
   input.placeholder = "Search";
   const searchBtn = document.createElement("button");
   searchBtn.id = "searchBtn";
-  searchBtn.appendChild(document.createTextNode("Search"));
-  searchBtn.id = "searchBtn";
-  searchBtn.textContent = "Search";
+  searchBtn.innerHTML = '<img src="../static/images/icons/search.png" alt="Search" width="17px" height="17px">';
   const backBtn = document.createElement("button");
   backBtn.id = "backBtn";
-  backBtn.disabled = "true";
-  backBtn.appendChild(document.createTextNode("Back"));
+  backBtn.disabled = true;
+  backBtn.innerHTML = '<img src="../static/images/icons/back.png" alt="Back" width="17px" height="17px">';
   const addRowBtn = document.createElement("button");
   addRowBtn.id = "addRowBtn";
-  addRowBtn.appendChild(document.createTextNode("Add Card"));
+  addRowBtn.innerHTML = '<img src="../static/images/icons/add.png" alt="Add Card" width="17px" height="17px">';
 
   searchBtn.addEventListener("click", searchCards);
   backBtn.addEventListener("click", goBack);
@@ -556,25 +564,14 @@ function getCrudControls() {
 
   var cardContainer = document.createElement("div");
   cardContainer.id = "card-container";
-  cardContainer.class = "card-container";
+  cardContainer.className = "card-container";
 
   renderCards(cardContainer);
 
   crudCards.appendChild(cardContainer);
   return crudCards;
 }
-/*
-<div id="modal" class="modal">
-    <div class="modal-content">
-        <label for="cardName">Name:</label>
-        <input type="text" id="cardName" placeholder="Enter name">
-        <label for="cardDescription">Description:</label>
-        <input type="text" id="cardDescription" placeholder="Enter description">
-        <button id="modalActionButton">Add Card</button>
-        <span class="close" id="closeModalBtn">&times;</span>
-    </div>
-</div>
-*/
+
 
 async function handleMedicineRoute() {
   contentContainer.innerHTML = "";
