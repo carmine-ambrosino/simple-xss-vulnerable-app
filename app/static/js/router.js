@@ -268,6 +268,7 @@ function setModalContent(card = {}, modalTitle) {
 }
 
 function openAddCardModal() {
+  document.getElementById("modalActionButton").textContent = "Add Card";
   currentEditingCardId = null; // Reset currentEditingCardId
   var modal = document.getElementById("modal");
   modal.style.display = "block";
@@ -309,20 +310,7 @@ function openEditCardModal(card) {
     });
     document.getElementById("backBtn").disabled = false;
     document.getElementById("addRowBtn").disabled = true;
-  } else {
-    // If the search term is empty, reset the data to its original state
-    switch (type) {
-      case "medicine":
-        data = allMedicines;
-        break;
-      case "patient":
-        data = allPatients;
-        break;
-      case "prescription":
-        data = tempData;
-        break;
-    }
-  }
+  } else getCardData();
   renderCards();
 }*/
 
