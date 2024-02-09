@@ -741,13 +741,14 @@ const handleLocation = () => {
   const path = window.location.pathname;
   console.log(path);
 
-  // redirect to '/api' whenever refreshing the page
-  window.onbeforeunload = function () {
-    window.setTimeout(function () {
-      window.location.href = "/api";
-    }, 0);
-    window.onbeforeunload = null; // necessary to prevent infinite loop, that kills your browser
-  };
+
+  // // redirect to '/api' whenever refreshing the page
+  // window.onbeforeunload = function () {
+  //   window.setTimeout(function () {
+  //     window.location.href = `${path}`;
+  //   }, 0);
+  //   window.onbeforeunload = null; // necessary to prevent infinite loop, that kills your browser
+  // };
 
   const routeHandler = routes_function[path];
 
@@ -762,5 +763,6 @@ const handleLocation = () => {
 
 window.onpopstate = handleLocation;
 window.route = route;
+
 
 handleLocation();
