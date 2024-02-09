@@ -268,13 +268,14 @@ function setModalContent(card = {}, modalTitle) {
 }
 
 function openAddCardModal() {
+  document.getElementById("modalActionButton").textContent="Add";
   currentEditingCardId = null; // Reset currentEditingCardId
   var modal = document.getElementById("modal");
   modal.style.display = "block";
 }
 
 function openEditCardModal(card) {
-  setModalContent(card, "Edit Card");
+  setModalContent(card, "Edit");
   currentEditingCardId = card.id; // Set currentEditingCardId
   var modal = document.getElementById("modal");
   modal.style.display = "block";
@@ -421,7 +422,33 @@ async function goBack() {
 function getModalInput(modalContentDiv, fieldName) {
     var nameLabel = document.createElement("label");
     nameLabel.setAttribute("for", fieldName);
-    nameLabel.textContent = fieldName;
+    //nameLabel.textContent = fieldName;
+    switch(fieldName) {
+      case "name":
+          nameLabel.textContent = "Name:";
+          break;
+      case "surname":
+          nameLabel.textContent = "Surname:";
+          break;
+      case "fiscal_code":
+          nameLabel.textContent = "Fiscal Code:";
+          break;
+      case "phone":
+          nameLabel.textContent = "Phone Number:";
+          break;
+      case "dt_birth":
+          nameLabel.textContent = "Date of Prescription:";
+          break;
+      case "dt":
+          nameLabel.textContent = "Date of Birth:";
+          break;
+      case "description":
+          nameLabel.textContent = "Description:";
+          break;
+      default:
+          nameLabel.textContent = fieldName;
+          break;
+    }
     nameLabel.classList.add("form-group");
   
     // Create the Name input
@@ -430,14 +457,14 @@ function getModalInput(modalContentDiv, fieldName) {
     nameInput.id = fieldName;
     nameInput.classList.add("field-value"); 
     if (fieldName === "dt" || fieldName === "dt_birth") {
-      nameInput.placeholder = "YYYY/MM/GG"; // Modificato per includere il formato desiderato
+      nameInput.placeholder = "GG/MM/YYYYY"; // Modificato per includere il formato desiderato
     } else {
       nameInput.placeholder = "Enter " + fieldName;
     }
-    nameLabel.style.display = "inline-block";
+    /*nameLabel.style.display = "inline-block";
     nameInput.style.display = "inline-block";
     nameInput.style.marginLeft = "10px"; // Aggiungi un margine tra label e input
-    nameInput.style.marginRight = "10px";
+    nameInput.style.marginRight = "10px";*/
 
     modalContentDiv.appendChild(nameLabel);
     modalContentDiv.appendChild(nameInput);
@@ -456,6 +483,7 @@ function getModalContainer() {
   if (type === "prescription") {
     var dropdown = document.createElement("select");
     dropdown.name = "patientDropdown";
+    dropdown.className = "patientDropdown";
     for (const patient of allPatients) {
       var option = document.createElement("option");
       option.value = patient.id;
@@ -474,8 +502,12 @@ function getModalContainer() {
   }
 
   if (type === "prescription") {
+    var medicineLabel = document.createElement("label");
+    medicineLabel.textContent = "Medicine:";
+    modalContentDiv.appendChild(medicineLabel);
     var medicineListContainer = document.createElement("div");
-    medicineListContainer.class = "medicine-list-container";
+    medicineListContainer.className = "medicine-list-container";
+
     for (const medicine of allMedicines) {
       var medicineContainer = document.createElement("div");
       var checkbox = document.createElement("input");
