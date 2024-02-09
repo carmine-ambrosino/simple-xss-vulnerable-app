@@ -267,6 +267,7 @@ function setModalContent(card = {}, modalTitle) {
 }
 
 function openAddCardModal() {
+  document.getElementById("modalActionButton").textContent = "Add Card";
   currentEditingCardId = null; // Reset currentEditingCardId
   var modal = document.getElementById("modal");
   modal.style.display = "block";
