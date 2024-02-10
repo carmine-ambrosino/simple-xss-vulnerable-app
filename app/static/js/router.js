@@ -241,7 +241,7 @@ function getCardData() {
 
 function setModalContent(card = {}, modalTitle) {
   // Ensure that the modal title element exists
-  console.log(data);
+  console.log(card);
   for (const fieldName of getCardFields()) {
     const input = document.getElementById(fieldName);
     input.value =
@@ -268,14 +268,14 @@ function setModalContent(card = {}, modalTitle) {
 }
 
 function openAddCardModal() {
-  document.getElementById("modalActionButton").textContent="Add";
+  document.getElementById("modalActionButton").textContent = "Add Card";
   currentEditingCardId = null; // Reset currentEditingCardId
   var modal = document.getElementById("modal");
   modal.style.display = "block";
 }
 
 function openEditCardModal(card) {
-  setModalContent(card, "Edit");
+  setModalContent(card, "Edit Card");
   currentEditingCardId = card.id; // Set currentEditingCardId
   var modal = document.getElementById("modal");
   modal.style.display = "block";
@@ -310,20 +310,7 @@ function openEditCardModal(card) {
     });
     document.getElementById("backBtn").disabled = false;
     document.getElementById("addRowBtn").disabled = true;
-  } else {
-    // If the search term is empty, reset the data to its original state
-    switch (type) {
-      case "medicine":
-        data = allMedicines;
-        break;
-      case "patient":
-        data = allPatients;
-        break;
-      case "prescription":
-        data = tempData;
-        break;
-    }
-  }
+  } else getCardData();
   renderCards();
 }*/
 
@@ -420,55 +407,50 @@ async function goBack() {
 }
 
 function getModalInput(modalContentDiv, fieldName) {
-    var nameLabel = document.createElement("label");
-    nameLabel.setAttribute("for", fieldName);
-    //nameLabel.textContent = fieldName;
-    switch(fieldName) {
-      case "name":
-          nameLabel.textContent = "Name:";
-          break;
-      case "surname":
-          nameLabel.textContent = "Surname:";
-          break;
-      case "fiscal_code":
-          nameLabel.textContent = "Fiscal Code:";
-          break;
-      case "phone":
-          nameLabel.textContent = "Phone Number:";
-          break;
-      case "dt_birth":
-          nameLabel.textContent = "Date of Birth:";
-          break;
-      case "dt":
-          nameLabel.textContent = "Date of Prescription:";
-          break;
-      case "description":
-          nameLabel.textContent = "Description:";
-          break;
-      default:
-          nameLabel.textContent = fieldName;
-          break;
-    }
-    nameLabel.classList.add("form-group");
-  
-    // Create the Name input
-    var nameInput = document.createElement("input");
-    nameInput.type = "text";
-    nameInput.id = fieldName;
-    nameInput.classList.add("field-value"); 
-    if (fieldName === "dt" || fieldName === "dt_birth") {
-      nameInput.placeholder = "GG/MM/YYYYY"; // Modificato per includere il formato desiderato
-    } else {
-      nameInput.placeholder = "Enter " + fieldName;
-    }
-    /*nameLabel.style.display = "inline-block";
-    nameInput.style.display = "inline-block";
-    nameInput.style.marginLeft = "10px"; // Aggiungi un margine tra label e input
-    nameInput.style.marginRight = "10px";*/
-
-    modalContentDiv.appendChild(nameLabel);
-    modalContentDiv.appendChild(nameInput);
+  var nameLabel = document.createElement("label");
+  nameLabel.setAttribute("for", fieldName);
+  //nameLabel.textContent = fieldName;
+  switch(fieldName) {
+    case "name":
+        nameLabel.textContent = "Name:";
+        break;
+    case "surname":
+        nameLabel.textContent = "Surname:";
+        break;
+    case "fiscal_code":
+        nameLabel.textContent = "Fiscal Code:";
+        break;
+    case "phone":
+        nameLabel.textContent = "Phone Number:";
+        break;
+    case "dt_birth":
+        nameLabel.textContent = "Date of Birth:";
+        break;
+    case "dt":
+        nameLabel.textContent = "Date of Prescription:";
+        break;
+    case "description":
+        nameLabel.textContent = "Description:";
+        break;
+    default:
+        nameLabel.textContent = fieldName;
+        break;
   }
+  nameLabel.classList.add("form-group");
+
+  // Create the Name input
+  var nameInput = document.createElement("input");
+  nameInput.type = "text";
+  nameInput.id = fieldName;
+  nameInput.classList.add("field-value"); 
+  if (fieldName === "dt" || fieldName === "dt_birth") {
+    nameInput.placeholder = "GG/MM/YYYYY"; // Modificato per includere il formato desiderato
+  } else {
+    nameInput.placeholder = "Enter " + fieldName;
+  }
+  modalContentDiv.appendChild(nameLabel);
+  modalContentDiv.appendChild(nameInput);
+}
 
 function getModalContainer() {
   // Create the main modal div
@@ -483,7 +465,6 @@ function getModalContainer() {
   if (type === "prescription") {
     var dropdown = document.createElement("select");
     dropdown.name = "patientDropdown";
-    dropdown.className = "patientDropdown";
     for (const patient of allPatients) {
       var option = document.createElement("option");
       option.value = patient.id;
@@ -506,8 +487,7 @@ function getModalContainer() {
     medicineLabel.textContent = "Medicine:";
     modalContentDiv.appendChild(medicineLabel);
     var medicineListContainer = document.createElement("div");
-    medicineListContainer.className = "medicine-list-container";
-
+    medicineListContainer.class = "medicine-list-container";
     for (const medicine of allMedicines) {
       var medicineContainer = document.createElement("div");
       var checkbox = document.createElement("input");
@@ -547,7 +527,6 @@ function getModalContainer() {
 }
 
 function modalAction() {
-  console.log(data);
   updatedCard = {};
   for (const fieldName of getCardFields()) {
     if (fieldName === "dt" || fieldName === "dt_birth") {
@@ -574,18 +553,15 @@ function modalAction() {
     updatedCard.medicines = medicinesList;
     const patientSelect = document.getElementsByName("patientDropdown")[0];
     updatedCard.id_patient = allPatients[patientSelect.selectedIndex].id;
+    updatedCard.patient_name = allPatients[patientSelect.selectedIndex].name + " " + allPatients[patientSelect.selectedIndex].surname;
   }
 
   console.log(updatedCard);
 
-  if (currentEditingCardId) updatedCard.id = currentEditingCardId;
-
   if (currentEditingCardId) {
+    updatedCard.id = currentEditingCardId;
     // If currentEditingCardId is present, update existing card
     getUpdateOperation()(updatedCard);
-    const new_patient = allPatients.filter((patient) => patient.id === updatedCard.id_patient)[0];
-    updatedCard.patient_name = new_patient.name + " " + new_patient.surname;
-    console.log(updatedCard);
     var index = data.findIndex((card) => card.id === currentEditingCardId);
     data[index] = updatedCard;
   } else {
@@ -597,7 +573,6 @@ function modalAction() {
 
   renderCards();
   closeModal();
-  console.log(data);
 }
 
 function closeModal() {
@@ -790,13 +765,14 @@ const handleLocation = () => {
   const path = window.location.pathname;
   console.log(path);
 
-  // redirect to '/api' whenever refreshing the page
-  window.onbeforeunload = function () {
-    window.setTimeout(function () {
-      window.location.href = "/api";
-    }, 0);
-    window.onbeforeunload = null; // necessary to prevent infinite loop, that kills your browser
-  };
+
+  // // redirect to '/api' whenever refreshing the page
+  // window.onbeforeunload = function () {
+  //   window.setTimeout(function () {
+  //     window.location.href = `${path}`;
+  //   }, 0);
+  //   window.onbeforeunload = null; // necessary to prevent infinite loop, that kills your browser
+  // };
 
   const routeHandler = routes_function[path];
 
@@ -811,5 +787,6 @@ const handleLocation = () => {
 
 window.onpopstate = handleLocation;
 window.route = route;
+
 
 handleLocation();
