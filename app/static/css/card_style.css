@@ -143,15 +143,15 @@ body {
 
 .medicine-list-container > div {
   display: flex;
-  align-items: center; /* Allinea verticalmente i contenuti */
-  margin-bottom: -10px; /* Riduci lo spazio tra le righe */
+  align-items: center; 
+  margin-bottom: -10px;
 }
 .prescription-medicine-checkbox {
-  margin-right: 5px; /* Aggiunge spazio tra il checkbox e il testo */
+  margin-right: 5px; 
 }
 
 label {
-  padding-bottom: 6px; /* Regola l'allineamento verticale del testo */
+  padding-bottom: 6px; 
 }
 
 .close {
