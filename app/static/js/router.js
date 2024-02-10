@@ -476,13 +476,13 @@ function modalAction() {
     updatedCard.medicines = medicinesList;
     const patientSelect = document.getElementsByName("patientDropdown")[0];
     updatedCard.id_patient = allPatients[patientSelect.selectedIndex].id;
+    updatedCard.patient_name = allPatients[patientSelect.selectedIndex].name + " " + allPatients[patientSelect.selectedIndex].surname;
   }
 
   console.log(updatedCard);
 
-  if (currentEditingCardId) updatedCard.id = currentEditingCardId;
-
   if (currentEditingCardId) {
+    updatedCard.id = currentEditingCardId;
     // If currentEditingCardId is present, update existing card
     getUpdateOperation()(updatedCard);
     var index = data.findIndex((card) => card.id === currentEditingCardId);
