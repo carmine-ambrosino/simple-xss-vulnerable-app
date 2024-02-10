@@ -1,6 +1,6 @@
 async function getAllPrescriptions() {
     try {
-      const response = await fetch('../static/prescription_bp.json');
+      const response = await fetch('../static/js/json/prescription_bp.json');
       const blueprintData = await response.json();
   
       const prescriptionBaseUrl = blueprintData.url_prefix;
@@ -18,7 +18,7 @@ async function getAllPrescriptions() {
 
 async function addPrescription(prescription) {
     try {
-        const response = await fetch('../static/prescription_bp.json');
+        const response = await fetch('../static/js/json/prescription_bp.json');
         const blueprintData = await response.json();
    
         const prescriptionBaseUrl = blueprintData.url_prefix;
@@ -36,7 +36,7 @@ async function addPrescription(prescription) {
 
 async function updatePrescription(prescription) {
     try {
-        const response = await fetch('../static/prescription_bp.json');
+        const response = await fetch('../static/js/json/prescription_bp.json');
         const blueprintData = await response.json();
    
         const prescriptionBaseUrl = blueprintData.url_prefix;
@@ -54,7 +54,7 @@ async function updatePrescription(prescription) {
 
 async function deletePrescription(prescriptionId) {
     try {
-        const response = await fetch('../static/prescription_bp.json');
+        const response = await fetch('../static/js/json/prescription_bp.json');
         const blueprintData = await response.json();
    
         const prescriptionBaseUrl = blueprintData.url_prefix;

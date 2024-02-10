@@ -127,13 +127,7 @@ main > div {
   align-items: center;
   justify-content: center;
   text-align: center;
-
 }
-
-/* #nav-content.hidden,
-#presentation-screen.hidden {
-  display: none;
-} */
 
 .sezione {
   display: none;
