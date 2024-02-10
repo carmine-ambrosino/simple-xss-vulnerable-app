@@ -1,6 +1,6 @@
 async function getAllPatients() {
     try {
-      const response = await fetch('../static/patient_bp.json');
+      const response = await fetch('../static/js/json/patient_bp.json');
       const blueprintData = await response.json();
   
       const patientBaseUrl = blueprintData.url_prefix;
@@ -18,7 +18,7 @@ async function getAllPatients() {
 
 async function addPatient(patient) {
     try {
-        const response = await fetch('../static/patient_bp.json');
+        const response = await fetch('../static/js/json/patient_bp.json');
         const blueprintData = await response.json();
    
         const patientBaseUrl = blueprintData.url_prefix;
@@ -36,7 +36,7 @@ async function addPatient(patient) {
 
 async function updatePatient(patient) {
     try {
-      const response = await fetch('../static/patient_bp.json');
+      const response = await fetch('../static/js/json/patient_bp.json');
       const blueprintData = await response.json();
 
       const patientBaseUrl = blueprintData.url_prefix;
@@ -54,7 +54,7 @@ async function updatePatient(patient) {
 
 async function deletePatient(patientId) {
     try {
-        const response = await fetch('../static/patient_bp.json');
+        const response = await fetch('../static/js/json/patient_bp.json');
         const blueprintData = await response.json();
    
         const patientBaseUrl = blueprintData.url_prefix;
