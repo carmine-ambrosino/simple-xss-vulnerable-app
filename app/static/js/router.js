@@ -407,29 +407,50 @@ async function goBack() {
 }
 
 function getModalInput(modalContentDiv, fieldName) {
-    var nameLabel = document.createElement("label");
-    nameLabel.setAttribute("for", fieldName);
-    nameLabel.textContent = fieldName;
-    nameLabel.classList.add("form-group");
-  
-    // Create the Name input
-    var nameInput = document.createElement("input");
-    nameInput.type = "text";
-    nameInput.id = fieldName;
-    nameInput.classList.add("field-value"); 
-    if (fieldName === "dt" || fieldName === "dt_birth") {
-      nameInput.placeholder = "YYYY/MM/GG"; // Modificato per includere il formato desiderato
-    } else {
-      nameInput.placeholder = "Enter " + fieldName;
-    }
-    nameLabel.style.display = "inline-block";
-    nameInput.style.display = "inline-block";
-    nameInput.style.marginLeft = "10px"; // Aggiungi un margine tra label e input
-    nameInput.style.marginRight = "10px";
-
-    modalContentDiv.appendChild(nameLabel);
-    modalContentDiv.appendChild(nameInput);
+  var nameLabel = document.createElement("label");
+  nameLabel.setAttribute("for", fieldName);
+  //nameLabel.textContent = fieldName;
+  switch(fieldName) {
+    case "name":
+        nameLabel.textContent = "Name:";
+        break;
+    case "surname":
+        nameLabel.textContent = "Surname:";
+        break;
+    case "fiscal_code":
+        nameLabel.textContent = "Fiscal Code:";
+        break;
+    case "phone":
+        nameLabel.textContent = "Phone Number:";
+        break;
+    case "dt_birth":
+        nameLabel.textContent = "Date of Birth:";
+        break;
+    case "dt":
+        nameLabel.textContent = "Date of Prescription:";
+        break;
+    case "description":
+        nameLabel.textContent = "Description:";
+        break;
+    default:
+        nameLabel.textContent = fieldName;
+        break;
   }
+  nameLabel.classList.add("form-group");
+
+  // Create the Name input
+  var nameInput = document.createElement("input");
+  nameInput.type = "text";
+  nameInput.id = fieldName;
+  nameInput.classList.add("field-value"); 
+  if (fieldName === "dt" || fieldName === "dt_birth") {
+    nameInput.placeholder = "GG/MM/YYYYY"; // Modificato per includere il formato desiderato
+  } else {
+    nameInput.placeholder = "Enter " + fieldName;
+  }
+  modalContentDiv.appendChild(nameLabel);
+  modalContentDiv.appendChild(nameInput);
+}
 
 function getModalContainer() {
   // Create the main modal div
@@ -462,6 +483,9 @@ function getModalContainer() {
   }
 
   if (type === "prescription") {
+    var medicineLabel = document.createElement("label");
+    medicineLabel.textContent = "Medicine:";
+    modalContentDiv.appendChild(medicineLabel);
     var medicineListContainer = document.createElement("div");
     medicineListContainer.class = "medicine-list-container";
     for (const medicine of allMedicines) {
