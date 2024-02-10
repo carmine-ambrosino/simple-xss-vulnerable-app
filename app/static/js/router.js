@@ -241,7 +241,7 @@ function getCardData() {
 
 function setModalContent(card = {}, modalTitle) {
   // Ensure that the modal title element exists
-  console.log(card);
+  console.log(data);
   for (const fieldName of getCardFields()) {
     const input = document.getElementById(fieldName);
     input.value =
@@ -437,10 +437,10 @@ function getModalInput(modalContentDiv, fieldName) {
           nameLabel.textContent = "Phone Number:";
           break;
       case "dt_birth":
-          nameLabel.textContent = "Date of Prescription:";
+          nameLabel.textContent = "Date of Birth:";
           break;
       case "dt":
-          nameLabel.textContent = "Date of Birth:";
+          nameLabel.textContent = "Date of Prescription:";
           break;
       case "description":
           nameLabel.textContent = "Description:";
@@ -547,6 +547,7 @@ function getModalContainer() {
 }
 
 function modalAction() {
+  console.log(data);
   updatedCard = {};
   for (const fieldName of getCardFields()) {
     if (fieldName === "dt" || fieldName === "dt_birth") {
@@ -582,6 +583,9 @@ function modalAction() {
   if (currentEditingCardId) {
     // If currentEditingCardId is present, update existing card
     getUpdateOperation()(updatedCard);
+    const new_patient = allPatients.filter((patient) => patient.id === updatedCard.id_patient)[0];
+    updatedCard.patient_name = new_patient.name + " " + new_patient.surname;
+    console.log(updatedCard);
     var index = data.findIndex((card) => card.id === currentEditingCardId);
     data[index] = updatedCard;
   } else {
@@ -593,6 +597,7 @@ function modalAction() {
 
   renderCards();
   closeModal();
+  console.log(data);
 }
 
 function closeModal() {
