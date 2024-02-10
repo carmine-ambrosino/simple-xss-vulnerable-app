@@ -123,17 +123,17 @@ body {
   margin-bottom: 10px; /* Aggiungi spazio tra gli elementi */
 }
 .patientDropdown{
-  height: 30px;
+  height: 10px;
   margin-bottom: 10px;
 }
 
 .medicine-list-container {
   display: flex;
   flex-direction: column;
-  max-height: 69px; /* Imposta l'altezza massima per mostrare solo due righe */
+  max-height: 69px;
   height: 68px;
   padding: 4px;
-  border: 1px solid #888;
+  border: 1px solid #000000;
   border-right: 0 solid;
   overflow-y: auto;
   grid-column: 2;
@@ -141,15 +141,15 @@ body {
 
 .medicine-list-container > div {
   display: flex;
-  align-items: center; /* Allinea verticalmente i contenuti */
-  margin-bottom: -10px; /* Riduci lo spazio tra le righe */
+  align-items: center; 
+  margin-bottom: -10px; 
 }
 .prescription-medicine-checkbox {
-  margin-right: 5px; /* Aggiunge spazio tra il checkbox e il testo */
+  margin-right: 5px; 
 }
 
 label {
-  padding-bottom: 6px; /* Regola l'allineamento verticale del testo */
+  padding-bottom: 6px; 
 }
 
 .close {

@@ -497,7 +497,7 @@ function getModalContainer() {
     medicineLabel.textContent = "Medicine:";
     modalContentDiv.appendChild(medicineLabel);
     var medicineListContainer = document.createElement("div");
-    medicineListContainer.class = "medicine-list-container";
+    medicineListContainer.className = "medicine-list-container";
     for (const medicine of allMedicines) {
       var medicineContainer = document.createElement("div");
       var checkbox = document.createElement("input");
