@@ -54,4 +54,6 @@ virtual machine, modify the following file:
 - ***nginx/nginx.conf*:** Change `server_name` with virtual machine ip address. 
 
 ## Note
-Do not use it in production environments as it is for demonstration purposes only to have an environment on which to test attack, like cross-site scripting.
+Do not use in production environments as there may be errors or bugs. 
+It is for demonstration purposes only to have an environment on which to test attack, like cross-site scripting.
+
