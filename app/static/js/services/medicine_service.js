@@ -1,7 +1,7 @@
 async function getAllMedicines() {
     try {
-      // Upload JSON representation of the blueprint
-      const response = await fetch('../static/medicine_bp.json');
+      // Upload JSON representation of the blueprint 
+      const response = await fetch('../static/js/json/medicine_bp.json');
       const blueprintData = await response.json();
   
       // Extract base URL from JSON
@@ -23,7 +23,7 @@ async function getAllMedicines() {
 
 async function addMedicine(medicine) {
     try {
-        const response = await fetch('../static/medicine_bp.json');
+        const response = await fetch('../static/js/json/medicine_bp.json');
         const blueprintData = await response.json();
    
         const medicineBaseUrl = blueprintData.url_prefix;
@@ -41,7 +41,7 @@ async function addMedicine(medicine) {
 
 async function updateMedicine(medicine) {
     try {
-        const response = await fetch('../static/medicine_bp.json');
+        const response = await fetch('../static/js/json/medicine_bp.json');
         const blueprintData = await response.json();
    
         const medicineBaseUrl = blueprintData.url_prefix;
@@ -59,7 +59,7 @@ async function updateMedicine(medicine) {
 
 async function deleteMedicine(medicineId) {
     try {
-        const response = await fetch('../static/medicine_bp.json');
+        const response = await fetch('../static/js/json/medicine_bp.json');
         const blueprintData = await response.json();
    
         const medicineBaseUrl = blueprintData.url_prefix;
