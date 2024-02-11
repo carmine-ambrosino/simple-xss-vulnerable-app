@@ -111,14 +111,22 @@ class PrescriptionService:
                 prescription.id_patient = id_patient
 
             # Clear existing medicines associated with the prescription
-            prescription.medicines = []
+            existing_medicines = set(prescription.medicines)
+            new_medicines = []
 
             for med_data in medicines_data:
                 medicine = Medicine.query.filter_by(name=med_data['name']).first()
                 if not medicine:
                     medicine = Medicine(name=med_data['name'], description=med_data.get('description'))
 
-                prescription.medicines.append(medicine)
+                new_medicines.append(medicine)
+
+            # Remove medicines that are not present in the new data
+            for med in existing_medicines:
+                if med not in new_medicines:
+                    prescription.medicines.remove(med)
+
+            prescription.medicines = new_medicines
 
             db.session.commit()
             return prescription, 'Prescription updated'
@@ -126,3 +134,4 @@ class PrescriptionService:
         except Exception as e:
             db.session.rollback()
             return False, f'Update prescription failed: {str(e)}'
+
