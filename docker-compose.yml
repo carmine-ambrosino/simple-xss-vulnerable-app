@@ -7,8 +7,8 @@ services:
   nginx:
     build: ./nginx
     ports:
-      - "8081:80"
-      - "9090:443"
+      - "80:80"
+      - "443:443"
     networks:
       - appnet
     depends_on:
@@ -46,6 +46,3 @@ networks:
 
 volumes:
   postgres_data:
-
- 
-
