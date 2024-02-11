@@ -84,19 +84,17 @@ class PrescriptionService:
 
     @staticmethod
     def update_prescription_by_id(prescription_id, id_patient, dt, description, medicines_data):
-        # Check UUID
         try:
-            prescription_uuid = uuid.UUID(prescription_id)  # Converts the UUID string to a UUID object
+            prescription_uuid = uuid.UUID(prescription_id)
         except ValueError:
             return False, 'Invalid uuid'
 
         prescription = Prescription.query.get(prescription_uuid)
         if not prescription:
             return False, 'Prescription not found'
-        
-        # Check UUID
+
         try:
-            patient_uuid = uuid.UUID(id_patient)  # Converts the UUID string to a UUID object
+            patient_uuid = uuid.UUID(id_patient)
         except ValueError:
             return False, 'Invalid uuid'
 
@@ -111,21 +109,20 @@ class PrescriptionService:
                 prescription.description = description
             if id_patient:
                 prescription.id_patient = id_patient
-            
+
+            # Clear existing medicines associated with the prescription
             prescription.medicines = []
+
             for med_data in medicines_data:
                 medicine = Medicine.query.filter_by(name=med_data['name']).first()
                 if not medicine:
                     medicine = Medicine(name=med_data['name'], description=med_data.get('description'))
-                if medicine:
-                    db.session.add(medicine)
-                    db.session.flush()
-            if medicines_data:
+
                 prescription.medicines.append(medicine)
-                
+
             db.session.commit()
             return prescription, 'Prescription updated'
-            
-        except ValueError:
+
+        except Exception as e:
             db.session.rollback()
-            return False, 'Update prescription failed'
+            return False, f'Update prescription failed: {str(e)}'
