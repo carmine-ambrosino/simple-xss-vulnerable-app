@@ -25,7 +25,6 @@ function formatDate(date) {
 }
 
 function formatDateFromString(date) {
-  console.log(date);
   const split = date.split("/");
   const day = split[0];
   const month = split[1];
@@ -418,7 +417,7 @@ function getModalInput(modalContentDiv, fieldName) {
     nameInput.id = fieldName;
     nameInput.classList.add("field-value"); 
     if (fieldName === "dt" || fieldName === "dt_birth") {
-      nameInput.placeholder = "YYYY/MM/GG"; // Modificato per includere il formato desiderato
+      nameInput.placeholder = "GG/MM/YYYY"; // Modificato per includere il formato desiderato
     } else {
       nameInput.placeholder = "Enter " + fieldName;
     }
@@ -705,6 +704,7 @@ async function handlePrescriptionRoute() {
   contentContainer.appendChild(image);
   contentContainer.appendChild(page);
 
+  console.log("QUI",data);
   contentContainer.appendChild(getCrudControls(data));
   contentContainer.appendChild(getModalContainer());
 }
