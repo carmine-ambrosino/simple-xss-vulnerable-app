@@ -104,6 +104,8 @@ body {
   border: 1px solid #888;
   max-width: 70%;
   width: auto;
+  max-height: 70%;
+  height: auto;
   display: grid; 
   grid-template-columns: 1fr 1fr; 
   gap: 5px; 
@@ -143,15 +145,15 @@ body {
 
 .medicine-list-container > div {
   display: flex;
-  align-items: center; /* Allinea verticalmente i contenuti */
-  margin-bottom: -10px; /* Riduci lo spazio tra le righe */
+  align-items: center; 
+  margin-bottom: -10px;
 }
 .prescription-medicine-checkbox {
-  margin-right: 5px; /* Aggiunge spazio tra il checkbox e il testo */
+  margin-right: 5px; 
 }
 
 label {
-  padding-bottom: 6px; /* Regola l'allineamento verticale del testo */
+  padding-bottom: 6px; 
 }
 
 .close {
@@ -182,9 +184,6 @@ label {
 
 #modalActionButton{
   display: inline-block;
-  position: absolute;
-  bottom: 5px; /* Distanza dal basso */
-  left: 5px; /* Distanza dalla sinistra */
   text-align: center;
   white-space: nowrap;
   color: #FFFFFF;

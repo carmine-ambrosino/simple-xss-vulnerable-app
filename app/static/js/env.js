@@ -15,3 +15,5 @@ const prescriptionFieldsName = ["dt", "description"];
 let allPatients = [];
 let allMedicines = [];
 let tempData = [];
+let currentEditingCardPatientName = "";
+let patientName ="";

@@ -1,4 +1,5 @@
 function setModalContent(card = {}, modalTitle) {
+  currentEditingCardPatientName = card.patient_name;
   // Ensure that the modal title element exists
   console.log(card);
   for (const fieldName of getCardFields()) {
@@ -10,12 +11,12 @@ function setModalContent(card = {}, modalTitle) {
   }
 
   if (type === "prescription") {
-    const dropdown = document.getElementsByName("patientDropdown")[0];
-    dropdown.selectedIndex = findIndexByField(
-      allPatients,
-      "id",
-      card.patient_id
-    );
+    patientName = card.patient_name || currentEditingCardPatientName;
+    const patientDropdown = document.getElementsByName("patientDropdown")[0];
+    if (patientDropdown) {
+      const selectedIndex = findIndexByField(allPatients, "id", card.patient_id);
+      patientDropdown.selectedIndex = selectedIndex !== -1 ? selectedIndex : 0;
+    }
     const prescription = data.filter(
       (prescription) => prescription.id === card.id
     )[0];
@@ -37,6 +38,7 @@ function openAddCardModal() {
 function openEditCardModal(card) {
   setModalContent(card, "Edit Card");
   currentEditingCardId = card.id; // Set currentEditingCardId
+  currentEditingCardPatientName = card.patient_name || "";
   var modal = document.getElementById("modal");
   modal.style.display = "block";
 }
