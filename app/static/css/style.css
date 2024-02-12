@@ -123,17 +123,12 @@ main > div {
 
 #presentation-screen {
   margin: 20px;
-
   align-items: center;
   justify-content: center;
   text-align: center;
-
+  max-height: 680px;
+  overflow-y: auto;
 }
-
-/* #nav-content.hidden,
-#presentation-screen.hidden {
-  display: none;
-} */
 
 .sezione {
   display: none;
