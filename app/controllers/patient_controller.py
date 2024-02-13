@@ -27,6 +27,21 @@ class PatientController:
         return jsonify(patient_dto.to_dict())  # Return name, surname, date of birth, fiscal code and phone number as JSON
 
     @staticmethod
+    def get_patient_by_fiscal_code(fiscal_code):
+        patients = patient_service.get_patients_instance()
+
+        patients_complete_info_dto = []
+        
+        for patient_instance in patients:
+            if (patient_instance.get('fiscal_code') == fiscal_code):
+                prescriptions_list = patient_service.get_prescriptions_instance(patient_instance.get('id'))
+                patient_info = PatientCompleteInfoDTO(patient_instance, prescriptions_list)
+                patient_dto = patient_info.to_dict()
+                patients_complete_info_dto.append(patient_dto)
+            
+                return jsonify(patients_complete_info_dto), 200
+
+    @staticmethod
     def delete_patient_by_id(patient_id):
         success, error_message = patient_service.delete_patient_by_id(patient_id)
 

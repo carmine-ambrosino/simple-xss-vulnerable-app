@@ -16,6 +16,24 @@ async function getAllPatients() {
     }
 }
 
+async function getAllInfoPatientFromFiscalCode(fiscal_code) {
+  try {
+    const response = await fetch('../static/js/json/patient_bp.json');
+    const blueprintData = await response.json();
+
+    const patientBaseUrl = blueprintData.url_prefix;
+
+    const apiUrl = patientBaseUrl + '/' + fiscal_code;
+
+    const resp = await axios.get(apiUrl);
+
+    return resp.data;
+  } catch (error) {
+    console.error('Error getAllPatients:', error);
+    throw error; 
+  }
+}
+
 async function addPatient(patient) {
     try {
         const response = await fetch('../static/js/json/patient_bp.json');
