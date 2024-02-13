@@ -9,10 +9,14 @@ patient_bp = Blueprint('patient', __name__, url_prefix='/api/patient')
 def get_all_patients():
     return PatientController.get_all_patients()
 
+@patient_bp.route('/<string:fiscal_code>', methods=['GET'])
+def get_patient_by_fiscal_code(fiscal_code):
+    return PatientController.get_patient_by_fiscal_code(fiscal_code)
+
 @patient_bp.route('/<string:patient_id>', methods=['GET'])
 def get_patient_by_id(patient_id):
     return PatientController.get_patient_by_id(patient_id)
-
+    
 @patient_bp.route('/<string:patient_id>', methods=['DELETE'])
 def delete_patient_by_id(patient_id):
     return PatientController.delete_patient_by_id(patient_id)

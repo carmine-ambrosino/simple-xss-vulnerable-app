@@ -32,7 +32,7 @@ async function handlePatientRoute() {
   contentContainer.innerHTML = "";
   type = "patient";
   data = await getAllPatients();
-  console.log(data);
+  console.log("Data handle patient", data);
 
   const page = document.createElement("h1");
   page.textContent = "Patients";
@@ -120,7 +120,7 @@ const routes_function = {
 
 const handleLocation = () => {
   const path = window.location.pathname;
-  console.log(path);
+  console.log("path", path);
   const routeHandler = routes_function[path];
 
   if (routeHandler && typeof routeHandler === "function") {

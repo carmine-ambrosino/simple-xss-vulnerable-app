@@ -1,7 +1,7 @@
 function setModalContent(card = {}, modalTitle) {
   currentEditingCardPatientName = card.patient_name;
   // Ensure that the modal title element exists
-  console.log(card);
+  console.log("card ", card);
   for (const fieldName of getCardFields()) {
     const input = document.getElementById(fieldName);
     input.value =
@@ -163,24 +163,39 @@ function getModalContainer() {
   return modalDiv;
 }
 
-function modalAction() {
+async function modalAction() {
   updatedCard = {};
   for (const fieldName of getCardFields()) {
     if (fieldName === "dt" || fieldName === "dt_birth") {
-      console.log(document.getElementById(fieldName).value);
+      console.log("field ", document.getElementById(fieldName).value);
       updatedCard[fieldName] = formatDateFromString(
         document.getElementById(fieldName).value
       );
     } else {
       updatedCard[fieldName] = document.getElementById(fieldName).value;
     }
+
+    if (fieldName === "fiscal_code") {
+      const fiscal_code_from_card = document.getElementById(fieldName).value;
+
+      try {
+        const patientInfo = await getAllInfoPatientFromFiscalCode(fiscal_code_from_card);
+        console.log("have prescription: ", patientInfo)
+        updatedCard.prescriptions = patientInfo[0].prescriptions;
+
+      } catch (error) {
+        console.error('No patient found with this fiscal code:', error);
+      }
+    }
+    
+    console.log("card aggiornata", updatedCard)
   }
   if (type === "prescription") {
     const medicinesList = [];
     for (const checkbox of document.getElementsByClassName(
       "prescription-medicine-checkbox"
     )) {
-      console.log(checkbox.checked);
+      console.log("check", checkbox.checked);
       if (checkbox.checked) {
         medicinesList.push(
           allMedicines.filter((medicine) => medicine.id === checkbox.id)[0]
@@ -196,7 +211,7 @@ function modalAction() {
       allPatients[patientSelect.selectedIndex].surname;
   }
 
-  console.log(updatedCard);
+  console.log("updated Card ", updatedCard);
 
   if (currentEditingCardId) {
     updatedCard.id = currentEditingCardId;

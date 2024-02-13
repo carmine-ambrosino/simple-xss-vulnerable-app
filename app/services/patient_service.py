@@ -24,6 +24,15 @@ class PatientService:
             return None, 'Patient not found'  # Error message if patient not found
 
         return patient, None  # # Return patient and none (NO ERROR)
+    
+    @staticmethod
+    def get_patient_by_fiscal_code(fiscal_code):
+
+        patient = Patient.query.filter_by(fiscal_code=fiscal_code).first()
+        if not patient:
+            return None, 'Patient not found'  # Error message if patient not found
+
+        return patient, None  # # Return patient and none (NO ERROR)
 
     @staticmethod
     def delete_patient_by_id(patient_id):
