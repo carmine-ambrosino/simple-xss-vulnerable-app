@@ -228,6 +228,10 @@ async function modalAction() {
 
   renderCards();
   closeModal();
+
+  if (!currentEditingCardId) {
+    location.reload();
+  }
 }
 
 function closeModal() {
