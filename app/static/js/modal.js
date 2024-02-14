@@ -36,6 +36,7 @@ function openAddCardModal() {
 }
 
 function openEditCardModal(card) {
+  originalFiscalCodeValue = card.fiscal_code;
   setModalContent(card, "Edit Card");
   currentEditingCardId = card.id; // Set currentEditingCardId
   currentEditingCardPatientName = card.patient_name || "";
@@ -167,7 +168,6 @@ async function modalAction() {
   updatedCard = {};
   for (const fieldName of getCardFields()) {
     if (fieldName === "dt" || fieldName === "dt_birth") {
-      console.log("field ", document.getElementById(fieldName).value);
       updatedCard[fieldName] = formatDateFromString(
         document.getElementById(fieldName).value
       );
@@ -175,21 +175,19 @@ async function modalAction() {
       updatedCard[fieldName] = document.getElementById(fieldName).value;
     }
 
-    if (fieldName === "fiscal_code") {
-      const fiscal_code_from_card = document.getElementById(fieldName).value;
-
+    if (fieldName === "fiscal_code" && originalFiscalCodeValue) { 
+      const fiscal_code_from_card = originalFiscalCodeValue;
       try {
         const patientInfo = await getAllInfoPatientFromFiscalCode(fiscal_code_from_card);
-        console.log("have prescription: ", patientInfo)
         updatedCard.prescriptions = patientInfo[0].prescriptions;
 
       } catch (error) {
         console.error('No patient found with this fiscal code:', error);
       }
     }
-    
-    console.log("card aggiornata", updatedCard)
+
   }
+
   if (type === "prescription") {
     const medicinesList = [];
     for (const checkbox of document.getElementsByClassName(
@@ -230,7 +228,6 @@ async function modalAction() {
   closeModal();
 
   if (!currentEditingCardId) {
-    // location.reload();
     setTimeout(function(){location.reload()}, 100);
   }
 }

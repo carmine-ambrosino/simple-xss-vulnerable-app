@@ -3,6 +3,7 @@ let data = [];
 let currentEditingCardId = null;
 let comingFromPatient = false;
 let type = "";
+let originalFiscalCodeValue;
 const medicineFieldsName = ["name", "description"];
 const patientFieldsName = [
   "name",
