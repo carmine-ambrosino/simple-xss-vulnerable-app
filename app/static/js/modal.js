@@ -230,7 +230,8 @@ async function modalAction() {
   closeModal();
 
   if (!currentEditingCardId) {
-    location.reload();
+    // location.reload();
+    setTimeout(function(){location.reload()}, 100);
   }
 }
 
