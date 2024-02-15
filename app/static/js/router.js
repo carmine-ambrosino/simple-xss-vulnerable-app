@@ -90,11 +90,21 @@ async function handlePrescriptionRoute() {
   contentContainer.appendChild(getModalContainer());
 }
 
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+  if (results && results[2]) {
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+  } else {
+      return "Utente"; // Valore di default
+  }
+}
 function handleHomeRoute() {
   contentContainer.innerHTML = "";
-
+  var username = getParameterByName('username');
   var titleContainer = document.createElement("h1");
-  titleContainer.textContent = "Welcome Doctor!";
+  titleContainer.innerHTML = "Welcome Doctor " + username +"!";
   var paragraphContainer = document.createElement("p");
   paragraphContainer.textContent = "GP-Office is here for you.";
 
