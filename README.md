@@ -41,11 +41,11 @@ docker compose -f docker-compose-dev.yml up -d
 ## App access
 ### Production Mode
 The application will be accessible from your browser at:
-- https://localhost
+- https://127.0.0.1
 
 ### Development mode
 The application will be accessible from your browser at:
-- **Flask:** https://localhost:5000
+- **Flask:** https://127.0.0.1:5000
 - **Database:** Avaible on port 5432
 
 ## Use in Virtual Machine
