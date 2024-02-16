@@ -8,7 +8,7 @@ services:
     build: ./nginx
     ports:
       - "80:80"
-      - "443:443"
+      - "90:443"
     networks:
       - appnet
     depends_on:
