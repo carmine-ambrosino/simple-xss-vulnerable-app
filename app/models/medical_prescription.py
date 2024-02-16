@@ -15,9 +15,5 @@ class MedicalPrescription(db.Model):
     id_prescription = db.Column(UUID(as_uuid=True), db.ForeignKey('healthcare_management.prescription.id'), nullable=False)
     id_medicine = db.Column(UUID(as_uuid=True), db.ForeignKey('healthcare_management.medicine.id'), nullable=False)
 
-    # prescription = relationship("Prescription", backref="medical_prescriptions") 
-    # medicine = relationship("Medicine", backref="medical_prescriptions")
-
-
     def to_dto(self):
         return MedicalPrescriptionDTO(id_prescription=self.prescription.id, id_medicine=self.medicine.id, qta=self.qta)

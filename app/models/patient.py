@@ -16,6 +16,5 @@ class Patient(db.Model):
     fiscal_code = db.Column(db.String(16))
     phone = db.Column(db.String(10))
 
-
     def to_dto(self):
         return PatientDTO(name=self.name, surname=self.surname, dt_birth=self.dt_birth, fiscal_code=self.fiscal_code, phone=self.phone)
