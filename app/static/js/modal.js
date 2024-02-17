@@ -29,7 +29,7 @@ function setModalContent(card = {}, modalTitle) {
 }
 
 function openAddCardModal() {
-  document.getElementById("modalActionButton").textContent = "Add Card";
+  document.getElementById("modalActionButton").textContent = "Add Card ";
   currentEditingCardId = null; // Reset currentEditingCardId
   var modal = document.getElementById("modal");
   modal.style.display = "block";
@@ -37,7 +37,7 @@ function openAddCardModal() {
 
 function openEditCardModal(card) {
   originalFiscalCodeValue = card.fiscal_code;
-  setModalContent(card, "Edit Card");
+  setModalContent(card, "Edit Card ");
   currentEditingCardId = card.id; // Set currentEditingCardId
   currentEditingCardPatientName = card.patient_name || "";
   var modal = document.getElementById("modal");
