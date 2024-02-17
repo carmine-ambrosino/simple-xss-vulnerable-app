@@ -97,7 +97,7 @@ function getParameterByName(name, url) {
   if (results && results[2]) {
       return decodeURIComponent(results[2].replace(/\+/g, " "));
   } else {
-      return "Utente"; // Valore di default
+      return "User"; // Default value
   }
 }
 function handleHomeRoute() {

@@ -47,7 +47,7 @@ function openEditCardModal(card) {
 function getModalInput(modalContentDiv, fieldName) {
   var nameLabel = document.createElement("label");
   nameLabel.setAttribute("for", fieldName);
-  //nameLabel.textContent = fieldName;
+  
   switch (fieldName) {
     case "name":
       nameLabel.textContent = "Name:";
@@ -82,7 +82,7 @@ function getModalInput(modalContentDiv, fieldName) {
   nameInput.id = fieldName;
   nameInput.classList.add("field-value");
   if (fieldName === "dt" || fieldName === "dt_birth") {
-    nameInput.placeholder = "GG/MM/YYYYY"; // Modificato per includere il formato desiderato
+    nameInput.placeholder = "GG/MM/YYYYY"; 
   } else {
     nameInput.placeholder = "Enter " + fieldName;
   }
@@ -221,7 +221,6 @@ async function modalAction() {
     // Otherwise, add a new card
     getInsertOperation()(updatedCard);
     data.push(updatedCard);
-    //originalData.push(updatedCard);
   }
 
   renderCards();

@@ -1,4 +1,3 @@
-
 class PatientCompleteInfoDTO:
     
     def __init__(self, patient_instance, prescriptions=None):
