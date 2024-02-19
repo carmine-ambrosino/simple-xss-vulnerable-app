@@ -32,7 +32,7 @@ Some features of the application are listed below:
 
 ## Installation
 ``` bash
-git clone https://github.com/carmine-ambrosino/simple-vulnerable-app.git
+git clone https://github.com/carmine-ambrosino/simple-xss-vulnerable-app.git
 cd simple-vulnerable-app
 
 # Production Mode
