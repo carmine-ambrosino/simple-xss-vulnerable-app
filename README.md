@@ -3,6 +3,12 @@ Simple containerized vulnerable web app written in Flask.
 
 For example, you can test a cross-site scripting attack.
 
+## ⚠️ Note
+Do not use in production environments as there may be errors or bugs. 
+It is for demonstration purposes only to have an environment on which to test attack, like cross-site scripting.
+
+## General description
+
 The app is designed to help general practitioners to manage their patients, patients prescriptions, and medicine.
 
 The application is called ***"GP-Office"***, which stands for ***"General Pratictioner's Office"***.
@@ -41,11 +47,11 @@ docker compose -f docker-compose-dev.yml up -d
 ## App access
 ### Production Mode
 The application will be accessible from your browser at:
-- https://localhost
+- https://127.0.0.1
 
 ### Development mode
 The application will be accessible from your browser at:
-- **Flask:** https://localhost:5000
+- **Flask:** https://127.0.0.1:5000
 - **Database:** Avaible on port 5432
 
 ## Use in Virtual Machine
@@ -53,7 +59,4 @@ This setup is specific for running locally; if you want to run it in a
 virtual machine, modify the following file:
 - ***nginx/nginx.conf*:** Change `server_name` with virtual machine ip address. 
 
-## Note
-Do not use in production environments as there may be errors or bugs. 
-It is for demonstration purposes only to have an environment on which to test attack, like cross-site scripting.
 
