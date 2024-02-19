@@ -1,4 +1,4 @@
-# simple-vulnerable-app 
+# simple-xss-vulnerable-app 
 Simple containerized vulnerable web app written in Flask. 
 
 For example, you can test a cross-site scripting attack.
