@@ -3,6 +3,12 @@ Simple containerized vulnerable web app written in Flask.
 
 For example, you can test a cross-site scripting attack.
 
+## ⚠️ Note
+Do not use in production environments as there may be errors or bugs. 
+It is for demonstration purposes only to have an environment on which to test attack, like cross-site scripting.
+
+## General description
+
 The app is designed to help general practitioners to manage their patients, patients prescriptions, and medicine.
 
 The application is called ***"GP-Office"***, which stands for ***"General Pratictioner's Office"***.
@@ -53,7 +59,4 @@ This setup is specific for running locally; if you want to run it in a
 virtual machine, modify the following file:
 - ***nginx/nginx.conf*:** Change `server_name` with virtual machine ip address. 
 
-## Note
-Do not use in production environments as there may be errors or bugs. 
-It is for demonstration purposes only to have an environment on which to test attack, like cross-site scripting.
 
